@@ -1,0 +1,20 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Mine Your Business</title>
+  </head>
+  <body>
+    <h1>Rigs</h1>
+
+    <ol>
+    {% for rig in all_rigs %}
+        <li>
+            {{ rig.name }}
+            Description: {{rig.location_id}}
+        </li>
+    {% endfor %}
+    </ol>
+  </body>
+</html>
