@@ -11,9 +11,13 @@
     <ol>
     {% for ticket in all_tickets %}
         <li>
-            {{ ticket.title }}
+            {{ ticket.title }} 
+            <br>
+            {{ticket.cat}}
+            <br>
+            Status: {{ticket.urgent}}
+            <br>
             Description: {{ticket.comments}}
-            {% comment %} Status {{ticket.urgent}} {% endcomment %}
         </li>
     {% endfor %}
     </ol>

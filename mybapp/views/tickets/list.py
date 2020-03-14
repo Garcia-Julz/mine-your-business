@@ -1,11 +1,11 @@
 import sqlite3
 from django.shortcuts import render
-from mybapp.models import Ticket
+from mybapp.models import Ticket, IssueType
 from ..connection import Connection
-# from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required
 
 
-# @login_required
+@login_required
 def ticket_list(request):
     if request.method == 'GET':
         with sqlite3.connect(Connection.db_path) as conn:
@@ -18,12 +18,15 @@ def ticket_list(request):
                 t.title,
                 t.comments,
                 t.urgent,
-                t.completed,
                 t.created_at,
-                t.issue_type_name_id,
-                t.miner_id,
-                t.rig_id
-            from mybapp_ticket b
+                i.cat,
+                r.name
+                
+            from mybapp_ticket t
+            JOIN mybapp_issuetype i
+            ON t.category_id = i.id
+            JOIN mybapp_rig r
+            ON t.miner_id = r.id
             """)
 
             all_tickets = []
@@ -35,11 +38,12 @@ def ticket_list(request):
                 ticket.title = row['title']
                 ticket.comments = row['comments']
                 ticket.urgent = row['urgent']
-                ticket.completed = row['completed']
-                ticket.created_at = row['created_at']
-                ticket.issue_type_name = row['issue_type_name']
-                ticket.miner_id = row['miner_id']
-                ticket.rig_id = row['rig_id']
+                ticket.name = row['name']
+                # ticket.completed = row['completed']
+                # ticket.created_at = row['created_at']
+                ticket.cat= row['cat']
+                # ticket.miner_id = row['miner_id']
+                # print('I am ticket', ticket.issue_type_name)
 
                 all_tickets.append(ticket)
 

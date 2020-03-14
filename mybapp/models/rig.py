@@ -1,6 +1,7 @@
 from django.db import models
 from .location import Location
 from .miner import Miner
+from django.shortcuts import render, redirect, reverse
 # from django.contrib.auth.models import User
 
 class Rig(models.Model):

@@ -2,10 +2,10 @@ import sqlite3
 from django.shortcuts import render, redirect, reverse
 from mybapp.models import Rig
 from ..connection import Connection
-# from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required
 
 
-# @login_required
+@login_required
 def rig_list(request):
     if request.method == 'GET':
         with sqlite3.connect(Connection.db_path) as conn:
@@ -18,11 +18,11 @@ def rig_list(request):
                 r.name,
                 r.location_id,
                 r.miner_id,
-                u.username
+                l.city
 
             from mybapp_rig r
-            join auth_user u 
-            on r.id = u.id
+            join mybapp_location l 
+            on r.id = l.id
             """)
 
             all_rigs = []
@@ -32,7 +32,9 @@ def rig_list(request):
                 rig = Rig()
                 rig.id = row["id"]
                 rig.name = row["name"]
-                rig.location = row["location"]
+                rig.location_id = row["location_id"]
+                rig.miner_id = row["miner_id"]
+                rig.city = row["city"]
 
                 all_rigs.append(rig)
 

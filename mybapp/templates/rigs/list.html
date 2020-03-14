@@ -11,8 +11,9 @@
     <ol>
     {% for rig in all_rigs %}
         <li>
-            {{ rig.name }}
-            Description: {{rig.location_id}}
+            Rig: {{ rig.name }}
+            <br>
+            Location: {{rig.city}}
         </li>
     {% endfor %}
     </ol>

@@ -1,15 +1,16 @@
 from django.db import models
+from django.shortcuts import render, redirect, reverse
 
 class IssueType(models.Model):
 
-    issue_type_name = models.CharField(max_length=50)
+    cat = models.CharField(max_length=50)
 
     class Meta:
-        verbose_name = ("issue_type")
-        verbose_name_plural = ("issue_types")
+        verbose_name = ("cat")
+        verbose_name_plural = ("cats")
 
     def __str__(self):
         return self.name
 
     def get_absolute_url(self):
-        return reverse("issue_type_detail", kwargs={"pk": self.pk})
+        return reverse("cat_detail", kwargs={"pk": self.pk})
