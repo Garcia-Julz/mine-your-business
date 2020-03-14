@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>MYB</title>
+  </head>
+  <body>
+    <h1>Ticket Form</h1>
+
+    {% if ticket.id is not None %}
+        <form action="{% url 'mybapp:ticket' ticket.id %}" method="post">
+    {% else %}
+        <form action="{% url 'mybapp:ticket_list' %}" method="post">
+    {% endif %}
+        {% csrf_token %}
+
+    <form action="{% url 'hrapp:ticket_list' %}" method="post">
+      {% csrf_token %}
+      <fieldset>
+          <label for="title">title: </label>
+          <input id="title" type="text" name="title" value="{{ ticket.title }}">
+      </fieldset>
+      <fieldset>
+          <label for="comments">description: </label>
+          <input id="comments" type="text" name="comments" value="{{ ticket.comments }}">
+      </fieldset>
+      <fieldset>
+          <label for="created_at">Date: </label>
+          <input id="created_at" type="date" name="created_at" value="{{ ticket.created_at }}">
+      </fieldset>
+      <fieldset>
+          <label for="urgent">Supervisor?: </label>
+          <input id="urgent" type="checkbox" name="urgent" {% if ticket.urgent %} checked {% endif %}>
+      </fieldset>
+      <fieldset>
+          <label for="rig">rig: </label>
+          <select id="rig" type="text" name="rig">
+                {% for rig in all_rigs %}
+                    <option {% if rig.id == ticket.rig_id %}selected{% endif %} value="{{ rig.id }}">
+                    {{ rig.dept_name }}</option>
+                {% endfor %}
+          </select>
+      </fieldset>
+
+      {% if ticket.id is not None %}
+          <input type="hidden" name="actual_method" value="PUT">
+            <input type="submit" value="Update" />
+      {% else %}
+          <input type="submit" value="Create" />
+      {% endif %}
+    </form>
+  </body>
+</html>

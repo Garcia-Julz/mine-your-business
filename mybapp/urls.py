@@ -10,4 +10,5 @@ urlpatterns = [
     path('tickets/', ticket_list, name='tickets'),
     path('miners/', miner_list, name='miners'),
     path('rigs/', rig_list, name='rigs'),
+    path('book/form', rig_form, name='book_form'),
 ]

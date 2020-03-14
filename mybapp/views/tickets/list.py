@@ -1,5 +1,6 @@
 import sqlite3
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.urls import reverse
 from mybapp.models import Ticket, IssueType
 from ..connection import Connection
 from django.contrib.auth.decorators import login_required
@@ -53,3 +54,30 @@ def ticket_list(request):
         }
 
         return render(request, template, context)
+
+    elif request.method == 'POST':
+        form_data = request.POST
+        if "urgent" in form_data:
+            urgent = True
+        else:
+            urgent = False
+
+        with sqlite3.connect(Connection.db_path) as conn:
+            db_cursor = conn.cursor()
+
+            db_cursor.execute("""
+            INSERT INTO mybapp_ticket
+            (
+                title, 
+                comments, 
+                created_at,
+                urgent, 
+                rig_id
+            )
+            VALUES (?, ?, ?, ?, ?)
+            """,
+            (form_data['title'], form_data['last_name'],
+                form_data['start_date'], urgent, 
+                    form_data['rig']))
+
+        return redirect(reverse('mybapp:ticket_list'))
