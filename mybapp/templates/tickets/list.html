@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Mine Your Business</title>
+  </head>
+  <body>
+    <h1>Tickets</h1>
+
+    <ol>
+    {% for ticket in all_tickets %}
+        <li>
+            {{ ticket.title }} 
+            <br>
+            {{ticket.cat}}
+            <br>
+            Status: {{ticket.urgent}}
+            <br>
+            Description: {{ticket.comments}}
+        </li>
+    {% endfor %}
+    </ol>
+  </body>
+</html>

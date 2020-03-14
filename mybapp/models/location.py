@@ -1,12 +1,13 @@
 from django.db import models
+from django.shortcuts import render, redirect, reverse
 
 class Location(models.Model):
 
-    name = models.CharField(max_length=50)
+    city = models.CharField(max_length=50)
 
     class Meta:
-        verbose_name = ("location")
-        verbose_name_plural = ("locations")
+        verbose_name = ("city")
+        verbose_name_plural = ("cities")
 
     def __str__(self):
         return self.name
