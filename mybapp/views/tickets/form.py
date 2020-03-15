@@ -10,8 +10,9 @@ from ..connection import Connection
 # from .ticket_details import get_ticket
 
 
-def get_rigs():
+def get_rigs(request):
     with sqlite3.connect(Connection.db_path) as conn:
+        current_user = request.user
         conn.row_factory = sqlite3.Row
         db_cursor = conn.cursor()
 
@@ -19,12 +20,14 @@ def get_rigs():
         select
             r.id,
             r.name,
-            l.city
+            l.city,
+            r.user_id
 
         from mybapp_rig r
         JOIN mybapp_location l
         ON r.location_id = l.id
-        """)
+        WHERE r.user_id = ?
+        """, (current_user.id,))
 
         return db_cursor.fetchall()
 
@@ -46,7 +49,7 @@ def get_issues():
 # @login_required
 def ticket_form(request):
     if request.method == 'GET':
-        rig = get_rigs()
+        rig = get_rigs(request)
         issue = get_issues()
         template = 'tickets/form.html'
         context = {
