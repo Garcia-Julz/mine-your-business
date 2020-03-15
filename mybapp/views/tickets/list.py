@@ -49,6 +49,7 @@ def ticket_list(request):
                 ticket.cat= row['cat']
                 ticket.name = row['name']
                 ticket.user_id = row['user_id']
+                # *** Might bring this back ***
                 # ticket.completed = row['completed']
                 # ticket.miner_id = row['miner_id']
                 # print('I am ticket', ticket.issue_type_name)
