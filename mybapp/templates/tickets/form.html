@@ -15,7 +15,7 @@
     {% endif %}
         {% csrf_token %}
 
-    <form action="{% url 'hrapp:ticket_list' %}" method="post">
+    <form action="{% url 'mybapp:ticket_list' %}" method="post">
       {% csrf_token %}
       <fieldset>
           <label for="title">title: </label>
@@ -30,7 +30,7 @@
           <input id="created_at" type="date" name="created_at" value="{{ ticket.created_at }}">
       </fieldset>
       <fieldset>
-          <label for="urgent">Supervisor?: </label>
+          <label for="urgent">Urgent?: </label>
           <input id="urgent" type="checkbox" name="urgent" {% if ticket.urgent %} checked {% endif %}>
       </fieldset>
       <fieldset>
@@ -38,7 +38,16 @@
           <select id="rig" type="text" name="rig">
                 {% for rig in all_rigs %}
                     <option {% if rig.id == ticket.rig_id %}selected{% endif %} value="{{ rig.id }}">
-                    {{ rig.dept_name }}</option>
+                    {{ rig.name }}</option>
+                {% endfor %}
+          </select>
+      </fieldset>
+      <fieldset>
+          <label for="issue">issue: </label>
+          <select id="issue" type="text" name="issue">
+                {% for issue in all_issues %}
+                    <option {% if issue.id == ticket.issue_id %}selected{% endif %} value="{{ issue.id }}">
+                    {{ issue.cat }}</option>
                 {% endfor %}
           </select>
       </fieldset>

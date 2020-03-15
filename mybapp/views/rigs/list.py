@@ -17,12 +17,15 @@ def rig_list(request):
                 r.id,
                 r.name,
                 r.location_id,
-                r.miner_id,
+                r.user_id,
+                u.username,
                 l.city
 
-            from mybapp_rig r
-            join mybapp_location l 
-            on r.id = l.id
+            FROM mybapp_rig r
+            JOIN auth_user u
+            ON r.user_id = u.id
+            JOIN mybapp_location l 
+            ON r.location_id = l.id
             """)
 
             all_rigs = []
@@ -33,7 +36,8 @@ def rig_list(request):
                 rig.id = row["id"]
                 rig.name = row["name"]
                 rig.location_id = row["location_id"]
-                rig.miner_id = row["miner_id"]
+                rig.user_id = row["user_id"]
+                rig.username = row["username"]
                 rig.city = row["city"]
 
                 all_rigs.append(rig)
