@@ -19,7 +19,8 @@ def miner_list(request):
             u.username,
             u.email
         from mybapp_miner m
-        join auth_user u on m.user_id = u.id
+        join auth_user u 
+        on m.user_id = u.id
         """)
 
         all_miners = []

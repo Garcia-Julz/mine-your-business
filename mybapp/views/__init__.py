@@ -5,5 +5,7 @@ from .tickets.list import ticket_list
 from .tickets.form import ticket_form
 from .rigs.list import rig_list
 from .rigs.form import rig_form
+from .locations.list import location_list
+from .locations.form import location_form
 from .miners.list import miner_list
 from .auth.register import register

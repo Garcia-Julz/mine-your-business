@@ -18,10 +18,6 @@
     <form action="{% url 'mybapp:rig_list' %}" method="post">
       {% csrf_token %}
       <fieldset>
-          <label for="name">name: </label>
-          <input id="name" type="text" name="name" value="{{ rig.name }}">
-      </fieldset>
-      <fieldset>
           <label for="location">location: </label>
           <select id="location" type="text" name="location">
                 {% for location in all_locations %}
@@ -29,6 +25,11 @@
                     {{ location.city }}</option>
                 {% endfor %}
           </select>
+          <a href='http://localhost:8000/location/form'>Create a Location</a>
+      </fieldset>
+      <fieldset>
+          <label for="name">name: </label>
+          <input id="name" type="text" name="name" value="{{ rig.name }}">
       </fieldset>
 
       {% if rig.id is not None %}
