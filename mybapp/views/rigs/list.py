@@ -1,14 +1,18 @@
 import sqlite3
 from django.shortcuts import render, redirect, reverse
-from mybapp.models import Rig
+from mybapp.models import Rig, Miner
 from ..connection import Connection
 from django.contrib.auth.decorators import login_required
 
+
+def sample_view(request):
+    current_user = request.user
 
 @login_required
 def rig_list(request):
     if request.method == 'GET':
         with sqlite3.connect(Connection.db_path) as conn:
+            current_user = request.user
             conn.row_factory = sqlite3.Row
             db_cursor = conn.cursor()
 
@@ -26,7 +30,8 @@ def rig_list(request):
             ON r.user_id = u.id
             JOIN mybapp_location l 
             ON r.location_id = l.id
-            """)
+			WHERE r.user_id = ?
+            """, (current_user.id,))
 
             all_rigs = []
             dataset = db_cursor.fetchall()
@@ -51,6 +56,8 @@ def rig_list(request):
         return render(request, template_name, context)
 
     elif request.method == 'POST':
+        current_user = request.user
+        current_miner_user = Miner.objects.get(user_id=current_user.id)
         form_data = request.POST
 
         with sqlite3.connect(Connection.db_path) as conn:
@@ -59,10 +66,14 @@ def rig_list(request):
             db_cursor.execute("""
             INSERT INTO mybapp_rig
             (
-                name, location_id
+                name, 
+                location_id, 
+                user_id
             )
-            VALUES (?, ?)
+            VALUES (?, ?, ?)
             """,
-            (form_data['name'], form_data['location_id']))
+            (form_data['name'], 
+            form_data['location'], 
+            current_user.id))
 
-        return redirect(reverse('mybapp:rigs'))
+        return redirect(reverse('mybapp:rig_list'))

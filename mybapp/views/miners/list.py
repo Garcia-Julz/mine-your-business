@@ -16,8 +16,6 @@ def miner_list(request):
             m.id,
             m.location_id,
             m.user_id,
-            -- u.first_name,
-            -- u.last_name,
             u.username,
             u.email
         from mybapp_miner m
@@ -32,8 +30,6 @@ def miner_list(request):
             mine.id = row["id"]
             mine.location_id = row["location_id"]
             mine.user_id = row["user_id"]
-            # mine.first_name = row["first_name"]
-            # mine.last_name = row["last_name"]
             mine.username = row["username"]
             mine.email = row["email"]
 
