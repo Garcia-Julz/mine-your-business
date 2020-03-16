@@ -8,10 +8,10 @@
   <body>
     <h1>Tickets</h1>
 
-    <ol>
+    <ul>
     {% for ticket in all_tickets %}
         <li>
-            {{ ticket.title }} 
+            {{ ticket.name }}: {{ ticket.title }} 
             <br>
             {{ticket.cat}}
             <br>
@@ -20,6 +20,6 @@
             Description: {{ticket.comments}}
         </li>
     {% endfor %}
-    </ol>
+    </ul>
   </body>
 </html>

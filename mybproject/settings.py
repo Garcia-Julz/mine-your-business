@@ -120,4 +120,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-LOGIN_REDIRECT_URL = '/tickets'
+LOGIN_REDIRECT_URL = '/home'
+
+LOGOUT_REDIRECT_URL = 'http://localhost:8000/accounts/login/?next='
