@@ -27,17 +27,35 @@ def get_location(location_id):
 
         return db_cursor.fetchone()
 
+def get_rig_location(location_id):
+    with sqlite3.connect(Connection.db_path) as conn:
+        conn.row_factory = sqlite3.Row
+        db_cursor = conn.cursor()
+
+        db_cursor.execute("""
+        select
+                r.name,
+                r.user_id,
+                r.location_id
+            FROM mybapp_rig r
+             WHERE r.location_id = ?
+            """, (location_id,))
+
+        return db_cursor.fetchall()
+
 # @login_required
 def location_details(request, location_id):
     if request.method == 'GET':
         location = get_location(location_id)
+        rig = get_rig_location(location_id)
 
         template = 'locations/detail.html'
         context = {
-            'location': location
+            'location': location,
+            'rigs': rig
         }
 
-        return render(request, template, {'location': location})
+        return render(request, template, context)
 
     elif request.method == 'POST':
         form_data = request.POST

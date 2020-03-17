@@ -5,13 +5,13 @@
     <h3>Current city</h3>
     <h3> city: {{ location.city }}</h3>
 
-    {% comment %} <ol>
-    {% for location in all_locations %}
+    <ol>
+    {% for rig in rigs %}
         <li>
-            rig: {{ location.name }}
+            rig: {{ rig.name }}
         </li>
     {% endfor %}
-    </ol> {% endcomment %}
+    </ol>
 
     <section>
         <form action="{% url 'mybapp:location' location.id %}" method="POST">
