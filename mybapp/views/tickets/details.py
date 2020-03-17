@@ -6,7 +6,6 @@ from ...models import Ticket
 from django.contrib.auth.decorators import login_required
 
 
-# @login_required
 def get_ticket(ticket_id):
     with sqlite3.connect(Connection.db_path) as conn:
         conn.row_factory = sqlite3.Row
@@ -23,8 +22,6 @@ def get_ticket(ticket_id):
                 t.rig_id,
                 t.user_id,
                 r.name,
-                --r.id,
-                --i.id,
                 i.cat
 
             FROM mybapp_ticket t
@@ -37,6 +34,7 @@ def get_ticket(ticket_id):
 
         return db_cursor.fetchone()
 
+@login_required
 def ticket_details(request, ticket_id):
     if request.method == 'GET':
         ticket = get_ticket(ticket_id)

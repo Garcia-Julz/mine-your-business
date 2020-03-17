@@ -19,7 +19,8 @@ def location_list(request):
             db_cursor.execute("""
             select
                 l.city,
-                l.user_id
+                l.user_id,
+                l.id
 
             FROM mybapp_location l
             JOIN auth_user u
@@ -34,8 +35,10 @@ def location_list(request):
                 loc = Location()
                 loc.city = row["city"]
                 loc.user_id = row["user_id"]
+                loc.id = row["id"]
                 # loc.id = row["id"]
                 # loc.id = row["id"]
+                print('hello World!', loc.id)
 
                 all_locations.append(loc)
 

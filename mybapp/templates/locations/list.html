@@ -11,7 +11,8 @@
     <ul>
     {% for location in all_locations %}
         <li>
-            {{ location.city }}
+            {% comment %} {{ location.city }} {% endcomment %}
+            <a href="{% url 'mybapp:location' location.id %}">{{ location.city }}<a/>
         </li>
     {% endfor %}
     </ul>
