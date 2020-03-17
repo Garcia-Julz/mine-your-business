@@ -38,7 +38,6 @@ def location_list(request):
                 loc.id = row["id"]
                 # loc.id = row["id"]
                 # loc.id = row["id"]
-                print('hello World!', loc.id)
 
                 all_locations.append(loc)
 
