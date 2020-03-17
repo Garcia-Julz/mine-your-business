@@ -2,42 +2,49 @@ import sqlite3
 from django.urls import reverse
 from django.shortcuts import render, redirect
 from ..connection import Connection
-from ...models import Employee
+from ...models import Ticket
+from django.contrib.auth.decorators import login_required
 
 
-def get_employee(employee_id):
+def get_ticket(ticket_id):
     with sqlite3.connect(Connection.db_path) as conn:
         conn.row_factory = sqlite3.Row
         db_cursor = conn.cursor()
 
         db_cursor.execute("""
             select
-                e.id,
-                e.first_name,
-                e.last_name,
-                e.start_date,
-                e.is_supervisor,
-                e.department_id,
-                d.dept_name,
-                d.id
-            from hrapp_employee e
-            JOIN hrapp_department d
-            ON e.department_id = d.id
-            WHERE e.id = ?;
-            """, (employee_id,))
+                t.id,
+                t.title,
+                t.comments,
+                t.urgent,
+                t.created_at,
+                t.category_id,
+                t.rig_id,
+                t.user_id,
+                r.name,
+                i.cat
+
+            FROM mybapp_ticket t
+            JOIN mybapp_rig r
+            ON t.rig_id = r.id
+            JOIN mybapp_issuetype i
+            ON i.id = t.category_id
+            WHERE t.id = ?
+            """, (ticket_id,))
 
         return db_cursor.fetchone()
 
-def employee_details(request, employee_id):
+@login_required
+def ticket_details(request, ticket_id):
     if request.method == 'GET':
-        employee = get_employee(employee_id)
+        ticket = get_ticket(ticket_id)
 
-        template = 'employees/employee_details.html'
+        template = 'tickets/detail.html'
         context = {
-            'employee': employee
+            'ticket': ticket
         }
 
-        return render(request, template, {'employee': employee})
+        return render(request, template, {'ticket': ticket})
 
     elif request.method == 'POST':
         form_data = request.POST
@@ -50,8 +57,8 @@ def employee_details(request, employee_id):
                 db_cursor = conn.cursor()
 
                 db_cursor.execute("""
-                DELETE FROM hrapp_employee
+                DELETE FROM mybapp_ticket
                 WHERE id = ?
-                """, (employee_id,))
+                """, (ticket_id,))
 
-            return redirect(reverse('hrapp:employee_list'))
+            return redirect(reverse('mybapp:ticket_list'))

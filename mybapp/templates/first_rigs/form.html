@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>MYB</title>
+  </head>
+  <body>
+    <h1>Lets make your first Rig!</h1>
+
+    {% if rig.id is not None %}
+        <form action="{% url 'mybapp:rig' rig.id %}" method="post">
+    {% else %}
+        <form action="{% url 'mybapp:rig_list_on' %}" method="post">
+    {% endif %}
+        {% csrf_token %}
+
+    <form action="{% url 'mybapp:rig_list_on' %}" method="post">
+      {% csrf_token %}
+      <fieldset>
+          <label for="location">location: </label>
+          <select id="location" type="text" name="location">
+                {% for location in all_locations %}
+                    <option {% if location.id == rig.location_id %}selected{% endif %} value="{{ location.id }}">
+                    {{ location.city }}</option>
+                {% endfor %}
+          </select>
+          <a href='http://localhost:8000/onboarding/form'>Create a Location</a>
+      </fieldset>
+      <fieldset>
+          <label for="name">name: </label>
+          <input id="name" type="text" name="name" value="{{ rig.name }}">
+      </fieldset>
+
+      {% if rig.id is not None %}
+          <input type="hidden" name="actual_method" value="PUT">
+            <input type="submit" value="Update" />
+      {% else %}
+          <input type="submit" value="Create" />
+      {% endif %}
+    </form>
+  </body>
+</html>

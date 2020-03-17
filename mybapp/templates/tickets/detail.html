@@ -1,0 +1,25 @@
+{% load static %}
+
+{% block content %}
+
+    <h3>{{ ticket.title }}</h3>
+    <h3> Description: {{ ticket.comments }}</h3>
+
+    <p>name: {{ ticket.name }}</p>
+    <p>Issue type: {{ ticket.cat }}</p>
+    <p>Due date: {{ ticket.created_at }}</p>
+
+    <section>
+        <form action="{% url 'mybapp:ticket' ticket.id %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="actual_method" value="DELETE">
+        <button>Fire!</button>
+        </form>
+
+        <form action="{% url 'mybapp:ticket' ticket.id %}" method="GET">
+            {% csrf_token %}
+            <button>Edit</button>
+        </form>
+    </section>
+    
+{% endblock %}

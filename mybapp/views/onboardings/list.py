@@ -9,7 +9,7 @@ def sample_view(request):
     current_user = request.user
 
 @login_required
-def location_list(request):
+def location_list_on(request):
     if request.method == 'GET':
         with sqlite3.connect(Connection.db_path) as conn:
             current_user = request.user
@@ -19,8 +19,7 @@ def location_list(request):
             db_cursor.execute("""
             select
                 l.city,
-                l.user_id,
-                l.id
+                l.user_id
 
             FROM mybapp_location l
             JOIN auth_user u
@@ -35,13 +34,12 @@ def location_list(request):
                 loc = Location()
                 loc.city = row["city"]
                 loc.user_id = row["user_id"]
-                loc.id = row["id"]
                 # loc.id = row["id"]
                 # loc.id = row["id"]
 
                 all_locations.append(loc)
 
-        template_name = 'locations/list.html'
+        template_name = 'onboardings/list.html'
 
         context = {
             'all_locations': all_locations
@@ -68,4 +66,4 @@ def location_list(request):
             (form_data['city'],
             current_user.id))
 
-        return redirect(reverse('mybapp:location_list'))
+        return redirect(reverse('mybapp:rig_form_on'))

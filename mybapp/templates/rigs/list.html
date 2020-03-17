@@ -7,11 +7,12 @@
   </head>
   <body>
     <h1>Rigs</h1>
-
+    <a href='http://localhost:8000/rig/form'>Add Rig</a>
     <ol>
     {% for rig in all_rigs %}
         <li>
-            Rig: {{ rig.name }}
+            <a href="{% url 'mybapp:rig' rig.id %}">{{ rig.name }}<a/>
+            {% comment %} Rig: {{ rig.name }} {% endcomment %}
             <br>
             Location: {{rig.city}}
         </li>

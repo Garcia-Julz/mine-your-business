@@ -1,6 +1,6 @@
 import sqlite3
 from django.shortcuts import render, redirect, reverse
-from mybapp.models import Location, Miner
+from mybapp.models import Rig, Miner
 from ..connection import Connection
 from django.contrib.auth.decorators import login_required
 
@@ -9,7 +9,7 @@ def sample_view(request):
     current_user = request.user
 
 @login_required
-def location_list(request):
+def rig_list_on(request):
     if request.method == 'GET':
         with sqlite3.connect(Connection.db_path) as conn:
             current_user = request.user
@@ -18,33 +18,39 @@ def location_list(request):
 
             db_cursor.execute("""
             select
-                l.city,
-                l.user_id,
-                l.id
+                r.id,
+                r.name,
+                r.location_id,
+                r.user_id,
+                u.username,
+                l.city
 
-            FROM mybapp_location l
+            FROM mybapp_rig r
             JOIN auth_user u
-            ON u.id = l.user_id
-			WHERE l.user_id = ?
+            ON r.user_id = u.id
+            JOIN mybapp_location l 
+            ON r.location_id = l.id
+			WHERE r.user_id = ?
             """, (current_user.id,))
 
-            all_locations = []
+            all_rigs = []
             dataset = db_cursor.fetchall()
 
             for row in dataset:
-                loc = Location()
-                loc.city = row["city"]
-                loc.user_id = row["user_id"]
-                loc.id = row["id"]
-                # loc.id = row["id"]
-                # loc.id = row["id"]
+                rig = Rig()
+                rig.id = row["id"]
+                rig.name = row["name"]
+                rig.location_id = row["location_id"]
+                rig.user_id = row["user_id"]
+                rig.username = row["username"]
+                rig.city = row["city"]
 
-                all_locations.append(loc)
+                all_rigs.append(rig)
 
-        template_name = 'locations/list.html'
+        template_name = 'rigs/list.html'
 
         context = {
-            'all_locations': all_locations
+            'all_rigs': all_rigs
         }
 
         return render(request, template_name, context)
@@ -58,14 +64,16 @@ def location_list(request):
             db_cursor = conn.cursor()
 
             db_cursor.execute("""
-            INSERT INTO mybapp_location
+            INSERT INTO mybapp_rig
             (
-                city,
+                name, 
+                location_id, 
                 user_id
             )
-            VALUES (?, ?)
+            VALUES (?, ?, ?)
             """,
-            (form_data['city'],
+            (form_data['name'], 
+            form_data['location'], 
             current_user.id))
 
-        return redirect(reverse('mybapp:location_list'))
+        return redirect(reverse('mybapp:home'))
