@@ -11,13 +11,15 @@
     <ul>
     {% for ticket in all_tickets %}
         <li>
-            {{ ticket.name }}: {{ ticket.title }} 
+            <div>
+            <a href="{% url 'mybapp:ticket' ticket.id %}">{{ ticket.name }}: {{ ticket.title }}<a/>
             <br>
             {{ticket.cat}}
             <br>
             Status: {{ticket.urgent}}
             <br>
             Description: {{ticket.comments}}
+            <div/>
         </li>
     {% endfor %}
     </ul>

@@ -13,7 +13,7 @@ def register(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            return redirect('mybapp:home')
+            return redirect('mybapp:location_form_on')
     else:
         form = RegisterForm()
     return render(request, 'registration/register.html', {'form': form})

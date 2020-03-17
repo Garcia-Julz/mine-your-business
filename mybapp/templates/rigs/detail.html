@@ -1,0 +1,24 @@
+{% load static %}
+
+{% block content %}
+
+    <h3>{{ rig.title }}</h3>
+    <h3> Description: {{ rig.comments }}</h3>
+
+    <p>name: {{ rig.name }}</p>
+    <p>location: {{ rig.city }}</p>
+
+    <section>
+        <form action="{% url 'mybapp:rig' rig.id %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="actual_method" value="DELETE">
+        <button>Fire!</button>
+        </form>
+
+        <form action="{% url 'mybapp:rig' rig.id %}" method="GET">
+            {% csrf_token %}
+            <button>Edit</button>
+        </form>
+    </section>
+    
+{% endblock %}
