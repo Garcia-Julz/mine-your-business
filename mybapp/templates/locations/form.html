@@ -17,6 +17,7 @@
 
     <form action="{% url 'mybapp:location_list' %}" method="post">
       {% csrf_token %}
+      
       <fieldset>
           <label for="city">city: </label>
           <input id="city" type="text" name="city" value="{{ location.city }}">
@@ -29,5 +30,6 @@
           <input type="submit" value="Create" />
       {% endif %}
     </form>
+
   </body>
 </html>

@@ -12,7 +12,7 @@
         <form action="{% url 'mybapp:rig' rig.id %}" method="POST">
             {% csrf_token %}
             <input type="hidden" name="actual_method" value="DELETE">
-        <button>Fire!</button>
+        <button>Remove</button>
         </form>
 
         <form action="{% url 'mybapp:rig' rig.id %}" method="GET">

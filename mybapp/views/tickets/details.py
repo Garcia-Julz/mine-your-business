@@ -34,7 +34,7 @@ def get_ticket(ticket_id):
 
         return db_cursor.fetchone()
 
-@login_required
+# @login_required
 def ticket_details(request, ticket_id):
     if request.method == 'GET':
         ticket = get_ticket(ticket_id)
@@ -44,7 +44,7 @@ def ticket_details(request, ticket_id):
             'ticket': ticket
         }
 
-        return render(request, template, {'ticket': ticket})
+        return render(request, template, context)
 
     elif request.method == 'POST':
         form_data = request.POST

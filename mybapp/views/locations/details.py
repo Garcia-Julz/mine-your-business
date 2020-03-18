@@ -27,6 +27,7 @@ def get_location(location_id):
 
         return db_cursor.fetchone()
 
+# @login_required
 def get_rig_location(location_id):
     with sqlite3.connect(Connection.db_path) as conn:
         conn.row_factory = sqlite3.Row
