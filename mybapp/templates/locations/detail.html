@@ -3,21 +3,12 @@
 {% block content %}
 
     <h3>Current city</h3>
-    <h3> city: {{ location.city }}</h3>
-
-    {% comment %} <ol>
-    {% for location in all_locations %}
-        <li>
-            rig: {{ location.name }}
-        </li>
-    {% endfor %}
-    </ol> {% endcomment %}
-
+    <h3> {{ location.city }}</h3>
     <section>
         <form action="{% url 'mybapp:location' location.id %}" method="POST">
             {% csrf_token %}
             <input type="hidden" name="actual_method" value="DELETE">
-        <button>Fire!</button>
+        <button>Remove!</button>
         </form>
 
         <form action="{% url 'mybapp:location' location.id %}" method="GET">
@@ -25,5 +16,15 @@
             <button>Edit</button>
         </form>
     </section>
+
+    <ul>
+    <p>Rigs in this location<p/>
+    {% for rig in rigs %}
+        <li>
+            {{ rig.name }}
+        </li>
+    {% endfor %}
+    </ul>
+
     
 {% endblock %}

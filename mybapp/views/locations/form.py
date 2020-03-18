@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from mybapp.models import Ticket, Rig
+from .details import get_location, get_rig_location
 # from mybapp.models import model_factory
 from ..connection import Connection
 # from .ticket_details import get_ticket
@@ -28,7 +29,7 @@ from ..connection import Connection
 
 #         return db_cursor.fetchall()
 
-@login_required
+# @login_required
 def location_form(request):
     if request.method == 'GET':
         # location = get_locations(request)
@@ -41,16 +42,17 @@ def location_form(request):
         template)
         # , context)
 
-# def ticket_edit_form(request, ticket_id):
+# @login_required
+def location_edit_form(request, location_id):
 
-#     if request.method == 'GET':
-#         ticket = get_ticket(ticket_id)
-#         rig = get_rigs()
+    if request.method == 'GET':
+        location = get_location(location_id)
+        rig = get_rig_location(location_id)
 
-#         template = 'tickets/ticket_form.html'
-#         context = {
-#             'ticket': ticket,
-#             'all_rigs': rig
-#         }
+        template = 'locations/form.html'
+        context = {
+            'location': location,
+            'all_rigs': rig
+        }
 
-#         return render(request, template, context)
+        return render(request, template, context)

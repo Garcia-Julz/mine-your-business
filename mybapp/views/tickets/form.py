@@ -7,7 +7,7 @@ from mybapp.models import IssueType
 from mybapp.models import Rig
 # from mybapp.models import model_factory
 from ..connection import Connection
-# from .ticket_details import get_ticket
+from .details import get_ticket
 
 
 @login_required
@@ -60,16 +60,19 @@ def ticket_form(request):
 
         return render(request, template, context)
 
-# def ticket_edit_form(request, ticket_id):
+def ticket_edit_form(request, ticket_id):
 
-#     if request.method == 'GET':
-#         ticket = get_ticket(ticket_id)
-#         rig = get_rigs()
+    if request.method == 'GET':
+        rig = get_rigs(request)
+        ticket = get_ticket(ticket_id)
+        issue = get_issues()
+        print('hello World!', get_ticket(ticket_id))
 
-#         template = 'tickets/ticket_form.html'
-#         context = {
-#             'ticket': ticket,
-#             'all_rigs': rig
-#         }
+        template = 'tickets/form.html'
+        context = {
+            'all_rigs': rig,
+            'ticket': ticket,
+            'all_issues': issue
+        }
 
-#         return render(request, template, context)
+        return render(request, template, context)

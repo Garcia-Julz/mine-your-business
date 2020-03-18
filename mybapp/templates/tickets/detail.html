@@ -13,10 +13,10 @@
         <form action="{% url 'mybapp:ticket' ticket.id %}" method="POST">
             {% csrf_token %}
             <input type="hidden" name="actual_method" value="DELETE">
-        <button>Fire!</button>
+        <button>Delete!</button>
         </form>
 
-        <form action="{% url 'mybapp:ticket' ticket.id %}" method="GET">
+        <form action="{% url 'mybapp:ticket_edit_form' ticket.id %}" method="GET">
             {% csrf_token %}
             <button>Edit</button>
         </form>
