@@ -11,11 +11,11 @@
     {% if ticket.id is not None %}
         <form action="{% url 'mybapp:ticket' ticket.id %}" method="post">
     {% else %}
-        <form action="{% url 'mybapp:ticket_form' %}" method="post">
+        <form action="{% url 'mybapp:ticket_list' %}" method="post">
     {% endif %}
         {% csrf_token %}
 
-    {% comment %} <form action="{% url 'mybapp:ticket_edit_form' ticket.id%}" method="post"> {% endcomment %}
+    <form action="{% url 'mybapp:ticket_edit_form' ticket.id%}" method="post">
       {% csrf_token %}
       <fieldset>
           <label for="title">title: </label>
