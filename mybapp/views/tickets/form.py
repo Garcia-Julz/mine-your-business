@@ -66,7 +66,7 @@ def ticket_edit_form(request, ticket_id):
         rig = get_rigs(request)
         ticket = get_ticket(ticket_id)
         issue = get_issues()
-        print('hello World!', get_ticket(ticket_id))
+        # print('hello World!', get_ticket(ticket_id))
 
         template = 'tickets/form.html'
         context = {

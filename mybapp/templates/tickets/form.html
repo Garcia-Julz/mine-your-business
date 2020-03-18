@@ -15,7 +15,7 @@
     {% endif %}
         {% csrf_token %}
 
-    <form action="{% url 'mybapp:ticket_edit_form' ticket.id%}" method="post">
+    <form action="{% url 'mybapp:ticket_list' %}" method="post">
       {% csrf_token %}
       <fieldset>
           <label for="title">title: </label>
