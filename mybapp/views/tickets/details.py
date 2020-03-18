@@ -36,6 +36,7 @@ def get_ticket(ticket_id):
 
 # @login_required
 def ticket_details(request, ticket_id):
+    # print('TEST!', get_ticket(ticket_id))
     if request.method == 'GET':
         ticket = get_ticket(ticket_id)
 
