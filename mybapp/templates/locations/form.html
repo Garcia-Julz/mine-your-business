@@ -15,7 +15,7 @@
     {% endif %}
         {% csrf_token %}
 
-    <form action="{% url 'mybapp:location_list' %}" method="post">
+    {% comment %} <form action="{% url 'mybapp:location_list' %}" method="post"> {% endcomment %}
       {% csrf_token %}
       
       <fieldset>

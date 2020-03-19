@@ -30,7 +30,7 @@ urlpatterns = [
     path('miners/', miner_list, name='miner_list'),
     # Edit forms
     path('locations/<int:location_id>/form/', location_edit_form, name='location_edit_form'),
-    # path('locations/<int:location_id>/form/', location_edit_form, name='location_edit_form'),
+    path('lrigs/<int:rig_id>/form/', rig_edit_form, name='rig_edit_form'),
     path('tickets/<int:ticket_id>/form/', ticket_edit_form, name='ticket_edit_form'),
 
 ]

@@ -50,13 +50,10 @@ def rig_details(request, rig_id):
             rig = Rig.objects.get(pk=rig_id)
 
             rig.name = form_data["name"]
-            rig.location_id = form_data["location_id"]
-            rig.user_id = form_data["user_id"]
-            rig.username = form_data["username"]
-            rig.city = form_data["city"]
-
+            rig.location_id = form_data["location"]
+            
             rig.save()
-            return redirect(reverse('mybapp:location_list'))
+            return redirect(reverse('mybapp:rig_list'))
 
         if (
             "actual_method" in form_data
