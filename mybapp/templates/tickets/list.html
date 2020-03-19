@@ -1,3 +1,6 @@
+{% extends 'shared/base.html' %}
+
+{% block content %}
 {% load static %}
 <!DOCTYPE html>
 <html>
@@ -7,7 +10,7 @@
   </head>
   <body>
     <h1>Tickets</h1>
-
+    <button><a href="{% url 'mybapp:ticket_form' %}">Add Ticket</a></button>
     <ul>
     {% for ticket in all_tickets %}
         <li>
@@ -25,3 +28,4 @@
     </ul>
   </body>
 </html>
+{% endblock %}

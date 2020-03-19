@@ -4,6 +4,7 @@
     {{ form.as_p }}
     <button type="submit">Login</button>
 </form>
-    <a href="http://localhost:8000/register/">
+    {% comment %} <a href="http://localhost:8000/register/">
     Register
-</a>
+</a> {% endcomment %}
+    <button><a href="{% url 'mybapp:register' %}">Register</a></button>

@@ -1,6 +1,6 @@
-{% load static %}
-
+{% extends 'shared/base.html' %}
 {% block content %}
+{% load static %}
 
     <h3>Current city</h3>
     <h3> {{ location.city }}</h3>
@@ -25,6 +25,5 @@
         </li>
     {% endfor %}
     </ul>
-
     
 {% endblock %}

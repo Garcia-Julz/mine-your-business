@@ -1,6 +1,8 @@
-{% load static %}
+{% extends 'shared/base.html' %}
 
 {% block content %}
+
+{% load static %}
 
     <h3>{{ rig.title }}</h3>
     <h3> Description: {{ rig.comments }}</h3>
