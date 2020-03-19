@@ -65,7 +65,6 @@ def location_details(request, location_id):
             "actual_method" in form_data
             and form_data["actual_method"] == "PUT"
         ):
-
             loc = Location.objects.get(pk=location_id)
 
             loc.city = form_data["city"]
