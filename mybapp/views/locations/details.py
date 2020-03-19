@@ -69,7 +69,7 @@ def location_details(request, location_id):
 
             loc.city = form_data["city"]
 
-            location.save()
+            loc.save()
             return redirect(reverse('mybapp:location_list'))
 
         if (
