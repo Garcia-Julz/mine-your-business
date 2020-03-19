@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Mine Your Business</title>
+
+    <style>.navList {
+            list-style-type: none;
+            display: flex;
+            border: 1px solid lightgray;
+            padding: 1em;
+            justify-content: space-around;
+        }
+        .navList__route {
+            margin: 0 0.5em;
+        }
+        </style>
+
+    <link rel="stylesheet" href="{% static 'styles/base.css' %}" type="text/css" media="screen" />
+
+    {% block css %}
+    {% endblock %}
+</head>
+
+<body>
+
+    <nav id="site-nav">
+        <ol class="navList">
+            <li class="navList__route"><a href="{% url 'mybapp:ticket_list' %}">Tickets</a></li>
+            <li class="navList__route"><a href="{% url 'mybapp:rig_list' %}">Rigs</a></li>
+            <li class="navList__route"><a href="{% url 'mybapp:location_list' %}">Locations</a></li>
+            {% comment %} <li class="navList__route"><a href="{% url 'mybapp:training_list' %}">Profile</a></li> {% endcomment %}
+        </ol>
+    </nav>
+
+<center><h1>MYB</h1></center>
+
+    {% block content %}
+    {% endblock %}
+
+    {% block scripts %}
+    {% endblock scripts %}
+
+</body>
+
+</html>

@@ -47,12 +47,10 @@ def location_edit_form(request, location_id):
 
     if request.method == 'GET':
         location = get_location(location_id)
-        rig = get_rig_location(location_id)
 
         template = 'locations/form.html'
         context = {
-            'location': location,
-            'all_rigs': rig
+            'location': location
         }
 
         return render(request, template, context)

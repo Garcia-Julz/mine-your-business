@@ -38,10 +38,22 @@ def rig_details(request, rig_id):
             'rig': rig
         }
 
-        return render(request, template, {'rig': rig})
-
+        return render(request, template, context)
+    
     elif request.method == 'POST':
         form_data = request.POST
+        # Check if this POST is for editing a project
+        if (
+            "actual_method" in form_data
+            and form_data["actual_method"] == "PUT"
+        ):
+            rig = Rig.objects.get(pk=rig_id)
+
+            rig.name = form_data["name"]
+            rig.location_id = form_data["location"]
+            
+            rig.save()
+            return redirect(reverse('mybapp:rig_list'))
 
         if (
             "actual_method" in form_data

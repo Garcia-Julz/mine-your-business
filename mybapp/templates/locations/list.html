@@ -1,3 +1,6 @@
+{% extends 'shared/base.html' %}
+
+{% block content %}
 {% load static %}
 <!DOCTYPE html>
 <html>
@@ -7,7 +10,7 @@
   </head>
   <body>
     <h1>locations</h1>
-    <a href='http://localhost:8000/location/form'>Add location</a>
+        <button><a href="{% url 'mybapp:location_form' %}">Add Location</a></button>
     <ul>
     {% for location in all_locations %}
         <li>
@@ -18,3 +21,4 @@
     </ul>
   </body>
 </html>
+{% endblock %}

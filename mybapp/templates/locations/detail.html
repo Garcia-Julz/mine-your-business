@@ -1,6 +1,6 @@
-{% load static %}
-
+{% extends 'shared/base.html' %}
 {% block content %}
+{% load static %}
 
     <h3>Current city</h3>
     <h3> {{ location.city }}</h3>
@@ -11,7 +11,7 @@
         <button>Remove!</button>
         </form>
 
-        <form action="{% url 'mybapp:location' location.id %}" method="GET">
+        <form action="{% url 'mybapp:location_edit_form' location.id %}" method="GET">
             {% csrf_token %}
             <button>Edit</button>
         </form>
@@ -25,6 +25,5 @@
         </li>
     {% endfor %}
     </ul>
-
     
 {% endblock %}

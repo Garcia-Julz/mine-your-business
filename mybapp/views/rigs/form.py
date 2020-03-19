@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from mybapp.models import Ticket, Rig
 # from mybapp.models import model_factory
 from ..connection import Connection
-# from .ticket_details import get_ticket
+from .details import get_rig
 
 
 @login_required
@@ -40,16 +40,16 @@ def rig_form(request):
 
         return render(request, template, context)
 
-# def ticket_edit_form(request, ticket_id):
+def rig_edit_form(request, rig_id):
 
-#     if request.method == 'GET':
-#         ticket = get_ticket(ticket_id)
-#         rig = get_rigs()
+    if request.method == 'GET':
+        rig = get_rig(rig_id)
+        location = get_locations(request)
 
-#         template = 'tickets/ticket_form.html'
-#         context = {
-#             'ticket': ticket,
-#             'all_rigs': rig
-#         }
+        template = 'rigs/form.html'
+        context = {
+            'all_locations': location,
+            'rig': rig
+        }
 
-#         return render(request, template, context)
+        return render(request, template, context)

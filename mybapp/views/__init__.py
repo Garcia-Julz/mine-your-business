@@ -17,11 +17,12 @@ from .tickets.form import ticket_edit_form
 from .rigs.list import rig_list
 from .rigs.form import rig_form
 from .rigs.details import rig_details
+from .rigs.form import rig_edit_form
 
 from .locations.list import location_list
 from .locations.form import location_form
 from .locations.details import location_details
-# from .locations.form import location_edit_form
+from .locations.form import location_edit_form
 
 from .miners.list import miner_list
 from .auth.register import register

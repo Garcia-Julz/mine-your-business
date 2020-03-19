@@ -1,4 +1,8 @@
+{% extends 'shared/base.html' %}
+
+{% block content %}
 {% load static %}
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -7,7 +11,7 @@
   </head>
   <body>
     <h1>Rigs</h1>
-    <a href='http://localhost:8000/rig/form'>Add Rig</a>
+        <button><a href="{% url 'mybapp:rig_form' %}">Add Rig</a></button>
     <ol>
     {% for rig in all_rigs %}
         <li>
@@ -20,3 +24,5 @@
     </ol>
   </body>
 </html>
+
+{% endblock %}
