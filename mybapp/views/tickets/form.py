@@ -75,4 +75,4 @@ def ticket_edit_form(request, ticket_id):
             'all_issues': issue
         }
 
-        return render(request, template, context)
+        return render(request, template, context) 

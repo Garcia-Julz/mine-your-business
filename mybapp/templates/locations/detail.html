@@ -11,7 +11,7 @@
         <button>Remove!</button>
         </form>
 
-        <form action="{% url 'mybapp:location' location.id %}" method="GET">
+        <form action="{% url 'mybapp:location_edit_form' location.id %}" method="GET">
             {% csrf_token %}
             <button>Edit</button>
         </form>

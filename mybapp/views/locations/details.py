@@ -39,7 +39,7 @@ def get_rig_location(location_id):
                 r.user_id,
                 r.location_id
             FROM mybapp_rig r
-             WHERE r.location_id = ?
+            WHERE r.location_id = ?
             """, (location_id,))
 
         return db_cursor.fetchall()
@@ -60,6 +60,18 @@ def location_details(request, location_id):
 
     elif request.method == 'POST':
         form_data = request.POST
+        # Check if this POST is for editing a project
+        if (
+            "actual_method" in form_data
+            and form_data["actual_method"] == "PUT"
+        ):
+
+            loc = Location.objects.get(pk=location_id)
+
+            loc.city = form_data["city"]
+
+            location.save()
+            return redirect(reverse('mybapp:location_list'))
 
         if (
             "actual_method" in form_data

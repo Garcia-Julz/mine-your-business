@@ -49,6 +49,27 @@ def ticket_details(request, ticket_id):
 
     elif request.method == 'POST':
         form_data = request.POST
+        # Check if this POST is for editing a project
+        if (
+            "actual_method" in form_data
+            and form_data["actual_method"] == "PUT"
+        ):
+            if "urgent" in form_data:
+                urgent = True
+            else:
+                urgent = False
+
+            ticket = Ticket.objects.get(pk=ticket_id)
+
+            ticket.title = form_data['title']
+            ticket.comments = form_data['comments']
+            ticket.created_at = form_data['created_at']
+            ticket.urgent = urgent
+            ticket.rig_id = form_data['rig']
+            ticket.category_id = form_data['issue']
+
+            ticket.save()
+            return redirect(reverse('mybapp:ticket_list'))
 
         if (
             "actual_method" in form_data
