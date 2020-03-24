@@ -14,7 +14,7 @@ def miner_list(request):
         db_cursor.execute("""
         select
             m.id,
-            m.location_id,
+            m.city,
             m.user_id,
             u.username,
             u.email
@@ -29,7 +29,7 @@ def miner_list(request):
         for row in dataset:
             mine = Miner()
             mine.id = row["id"]
-            mine.location_id = row["location_id"]
+            mine.city = row["city"]
             mine.user_id = row["user_id"]
             mine.username = row["username"]
             mine.email = row["email"]

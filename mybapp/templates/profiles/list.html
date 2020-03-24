@@ -1,0 +1,26 @@
+{% extends 'shared/base.html' %}
+
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Mine Your Business</title>
+  </head>
+  <body>
+    <h1>Profile</h1>
+        {% comment %} <button><a href="{% url 'mybapp:profile_form' %}">Add Location</a></button> {% endcomment %}
+    <ul>
+    {% for profile in current_profile %}
+            <a href="{% url 'mybapp:profile' profile.id %}">{{ profile.username }}<a/>
+            {% comment %} {{ profile.username }}  {% endcomment %}
+            <br>
+            {{ profile.email }} 
+            <br>
+            {{ profile.city }}
+    {% endfor %}
+    </ul>
+  </body>
+</html>
+{% endblock %}

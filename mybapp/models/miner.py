@@ -7,11 +7,11 @@ from .location import Location
 
 class Miner(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    location = models.ForeignKey(
-        Location, related_name="locations",
-        null=True, # Makes column nullable in DB
-        blank=True, # Allows blank value on objects
-        on_delete=models.CASCADE)
+    city = models.CharField(max_length=20)
+        # Location, related_name="locations",
+        # null=True, # Makes column nullable in DB
+        # blank=True, # Allows blank value on objects
+        # on_delete=models.CASCADE)
 
 
 # These receiver hooks allow you to continue to

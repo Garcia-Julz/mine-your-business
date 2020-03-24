@@ -24,5 +24,10 @@ from .locations.form import location_form
 from .locations.details import location_details
 from .locations.form import location_edit_form
 
+from .profiles.list import profile_list
+from .profiles.form import profile_form
+from .profiles.form import profile_edit_form
+from .profiles.details import profile_details
+
 from .miners.list import miner_list
 from .auth.register import register
