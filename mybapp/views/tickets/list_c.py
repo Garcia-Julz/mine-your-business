@@ -10,7 +10,7 @@ def sample_view(request):
     current_user = request.user
 
 @login_required
-def ticket_list(request):
+def ticket_list_c(request):
     if request.method == 'GET':
         with sqlite3.connect(Connection.db_path) as conn:
             current_user = request.user
@@ -18,7 +18,7 @@ def ticket_list(request):
             db_cursor = conn.cursor()
 
             db_cursor.execute("""
-            select
+            SELECT
                 t.id,
                 t.title,
                 t.comments,
@@ -34,7 +34,7 @@ def ticket_list(request):
             ON t.category_id = i.id
             JOIN mybapp_rig r 
             ON r.id = t.rig_id
-            WHERE t.user_id = ?
+            WHERE t.completed = 1 AND t.user_id = ?
             """, (current_user.id,))
 
             all_tickets = []

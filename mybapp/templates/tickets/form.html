@@ -20,22 +20,34 @@
 
     <form action="{% url 'mybapp:ticket_list' %}" method="post">
       {% csrf_token %}
+
       <fieldset>
           <label for="title">title: </label>
           <input id="title" type="text" name="title" value="{{ ticket.title }}">
       </fieldset>
+
       <fieldset>
           <label for="comments">description: </label>
           <input id="comments" type="text" name="comments" value="{{ ticket.comments }}">
       </fieldset>
+
       <fieldset>
           <label for="created_at">Date: </label>
           <input id="created_at" type="date" name="created_at" value="{{ ticket.created_at }}">
       </fieldset>
+
       <fieldset>
           <label for="urgent">Urgent?: </label>
           <input id="urgent" type="checkbox" name="urgent" {% if ticket.urgent %} checked {% endif %}>
       </fieldset>
+
+      {% if ticket.id != null %}
+      <fieldset>
+          <label for="completed">Completed?: </label>
+          <input id="completed" type="checkbox" name="completed" {% if ticket.completed %} checked {% endif %}>
+      </fieldset>
+      {% endif %}
+
       <fieldset>
           <label for="rig">rig: </label>
           <select id="rig" type="text" name="rig">
@@ -45,6 +57,7 @@
                 {% endfor %}
           </select>
       </fieldset>
+      
       <fieldset>
           <label for="issue">issue: </label>
           <select id="issue" type="text" name="issue">

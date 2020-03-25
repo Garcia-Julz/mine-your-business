@@ -9,10 +9,12 @@
     <title>Mine Your Business</title>
   </head>
   <body>
-    <h1>Tickets</h1>
     <button><a href="{% url 'mybapp:ticket_form' %}">Add Ticket</a></button>
+    <div id='opentickets'>
+    <h1>Open Tickets</h1>
     <ul>
     {% for ticket in all_tickets %}
+    {% if ticket.completed == 0 %}
         <li class=''>
             <a href="{% url 'mybapp:ticket' ticket.id %}">{{ ticket.name }}: {{ ticket.title }}<a/>
             <br>
@@ -24,8 +26,30 @@
             <br>
             Description: {{ticket.comments}}
         </li>
+    {% endif %}
     {% endfor %}
     </ul>
+    </div>
+    <div id='closedtickets'>
+    <h1>Closed Tickets</h1>
+    <ul>
+    {% for ticket in all_tickets %}
+    {% if ticket.completed == 1 %}
+        <li class=''>
+            <a href="{% url 'mybapp:ticket' ticket.id %}">{{ ticket.name }}: {{ ticket.title }}<a/>
+            <br>
+            {{ticket.cat}}
+            <br>
+                {% if ticket.urgent is 1 %}
+                <p>URGENT!</p>
+                {% endif %}
+            <br>
+            Description: {{ticket.comments}}
+        </li>
+    {% endif %}
+    {% endfor %}
+    </ul>
+    </div>
   </body>
 </html>
 {% endblock %}

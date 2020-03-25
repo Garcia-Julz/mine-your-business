@@ -18,6 +18,7 @@ def get_ticket(ticket_id):
                 t.title,
                 t.comments,
                 t.urgent,
+                t.completed,
                 t.created_at,
                 t.category_id,
                 t.rig_id,
@@ -55,6 +56,11 @@ def ticket_details(request, ticket_id):
             "actual_method" in form_data
             and form_data["actual_method"] == "PUT"
         ):
+            if "completed" in form_data:
+                completed = True
+            else:
+                completed = False
+
             if "urgent" in form_data:
                 urgent = True
             else:
@@ -66,6 +72,7 @@ def ticket_details(request, ticket_id):
             ticket.comments = form_data['comments']
             ticket.created_at = form_data['created_at']
             ticket.urgent = urgent
+            ticket.completed = completed
             ticket.rig_id = form_data['rig']
             ticket.category_id = form_data['issue']
 
