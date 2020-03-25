@@ -8,7 +8,7 @@ from ..connection import Connection
 from .details import get_rig
 
 
-@login_required
+# @login_required
 def get_locations(request):
     with sqlite3.connect(Connection.db_path) as conn:
         current_user = request.user
@@ -40,6 +40,7 @@ def rig_form(request):
 
         return render(request, template, context)
 
+# @login_required
 def rig_edit_form(request, rig_id):
 
     if request.method == 'GET':

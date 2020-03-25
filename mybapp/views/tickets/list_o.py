@@ -6,12 +6,11 @@ from ..connection import Connection
 from django.contrib.auth.decorators import login_required
 
 
-# @login_required
 def sample_view(request):
     current_user = request.user
 
 @login_required
-def ticket_list_s(request):
+def ticket_list_o(request):
     if request.method == 'GET':
         with sqlite3.connect(Connection.db_path) as conn:
             current_user = request.user
@@ -19,11 +18,12 @@ def ticket_list_s(request):
             db_cursor = conn.cursor()
 
             db_cursor.execute("""
-            select
+            SELECT
                 t.id,
                 t.title,
                 t.comments,
                 t.urgent,
+                t.completed,
                 t.created_at,
                 i.cat,
                 r.name,
@@ -34,9 +34,7 @@ def ticket_list_s(request):
             ON t.category_id = i.id
             JOIN mybapp_rig r 
             ON r.id = t.rig_id
-            WHERE t.user_id = ? AND urgent = 1
-            ORDER BY created_at ASC
-            LIMIT 3
+            WHERE t.completed = 0 AND t.user_id = ?
             """, (current_user.id,))
 
             all_tickets = []
@@ -48,6 +46,7 @@ def ticket_list_s(request):
                 ticket.title = row['title']
                 ticket.comments = row['comments']
                 ticket.urgent = row['urgent']
+                ticket.completed = row['completed']
                 ticket.created_at = row['created_at']
                 ticket.cat= row['cat']
                 ticket.name = row['name']
@@ -59,9 +58,52 @@ def ticket_list_s(request):
 
                 all_tickets.append(ticket)
 
-        template = 'home/home.html'
+        template = 'tickets/list.html'
         context = {
             'all_tickets': all_tickets
         }
 
         return render(request, template, context)
+
+    elif request.method == 'POST':
+        current_user = request.user
+        current_miner_user = Miner.objects.get(user_id=current_user.id)
+        form_data = request.POST
+        
+        if "urgent" in form_data:
+            urgent = True
+        else:
+            urgent = False
+
+        if "completed" in form_data:
+            completed = True
+        else:
+            completed = False
+
+        with sqlite3.connect(Connection.db_path) as conn:
+            db_cursor = conn.cursor()
+
+            db_cursor.execute("""
+            INSERT INTO mybapp_ticket
+            (
+                title,
+                comments,
+                created_at,
+                urgent,
+                completed,
+                rig_id,
+                category_id,
+                user_id
+            )
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            """,
+            (form_data['title'],
+            form_data['comments'],
+            form_data['created_at'],
+            urgent,
+            completed,
+            form_data['rig'],
+            form_data['issue'],
+            current_user.id))
+
+        return redirect(reverse('mybapp:ticket_list'))

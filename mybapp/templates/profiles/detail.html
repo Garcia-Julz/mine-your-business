@@ -1,0 +1,31 @@
+{% extends 'shared/base.html' %}
+{% block content %}
+{% load static %}
+
+    <h3>Profile</h3>
+    <h3> {{ profile.username }}</h3>
+    <h3> {{ profile.email }}</h3>
+    <h3> {{ profile.city }}</h3>
+    <section>
+        <form action="{% url 'mybapp:profile' profile.id %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="actual_method" value="DELETE">
+        <button>Remove!</button>
+        </form>
+
+        <form action="{% url 'mybapp:profile_edit_form' profile.id %}" method="GET">
+            {% csrf_token %}
+            <button>Edit</button>
+        </form>
+    </section>
+
+    {% comment %} <ul>
+    <p>Rigs in this profile<p/>
+    {% for rig in rigs %}
+        <li>
+            {{ rig.name }}
+        </li>
+    {% endfor %}
+    </ul> {% endcomment %}
+    
+{% endblock %}

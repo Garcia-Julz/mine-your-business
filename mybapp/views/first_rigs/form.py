@@ -1,14 +1,14 @@
 import sqlite3
 from django.shortcuts import render, redirect
 from django.urls import reverse
-from django.contrib.auth.decorators import login_required
 from mybapp.models import Ticket, Rig
 # from mybapp.models import model_factory
 from ..connection import Connection
 # from .ticket_details import get_ticket
+from django.contrib.auth.decorators import login_required
 
 
-@login_required
+# @login_required
 def get_locations(request):
     with sqlite3.connect(Connection.db_path) as conn:
         current_user = request.user

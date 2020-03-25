@@ -10,6 +10,7 @@ class Ticket(models.Model):
     title = models.CharField(max_length=50)
     comments = models.CharField(max_length=200)
     urgent = models.BooleanField(default=False)
+    completed = models.BooleanField(default=False)
     category = models.ForeignKey(IssueType, on_delete=models.CASCADE)
     created_at = models.DateField(auto_now=False, auto_now_add=True)
     rig = models.ForeignKey(Rig, on_delete=models.CASCADE)

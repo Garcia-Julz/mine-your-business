@@ -23,6 +23,7 @@ def ticket_list(request):
                 t.title,
                 t.comments,
                 t.urgent,
+                t.completed,
                 t.created_at,
                 i.cat,
                 r.name,
@@ -45,6 +46,7 @@ def ticket_list(request):
                 ticket.title = row['title']
                 ticket.comments = row['comments']
                 ticket.urgent = row['urgent']
+                ticket.completed = row['completed']
                 ticket.created_at = row['created_at']
                 ticket.cat= row['cat']
                 ticket.name = row['name']
@@ -67,10 +69,16 @@ def ticket_list(request):
         current_user = request.user
         current_miner_user = Miner.objects.get(user_id=current_user.id)
         form_data = request.POST
+        
         if "urgent" in form_data:
             urgent = True
         else:
             urgent = False
+
+        if "completed" in form_data:
+            completed = True
+        else:
+            completed = False
 
         with sqlite3.connect(Connection.db_path) as conn:
             db_cursor = conn.cursor()
@@ -78,21 +86,23 @@ def ticket_list(request):
             db_cursor.execute("""
             INSERT INTO mybapp_ticket
             (
-                title, 
-                comments, 
+                title,
+                comments,
                 created_at,
-                urgent, 
+                urgent,
+                completed,
                 rig_id,
                 category_id,
                 user_id
             )
-            VALUES (?, ?, ?, ?, ?, ?, ?)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
             """,
-            (form_data['title'], 
+            (form_data['title'],
             form_data['comments'],
-            form_data['created_at'], 
-            urgent, 
-            form_data['rig'], 
+            form_data['created_at'],
+            urgent,
+            completed,
+            form_data['rig'],
             form_data['issue'],
             current_user.id))
 

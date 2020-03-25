@@ -32,6 +32,8 @@ def get_rigs(request):
 
         return db_cursor.fetchall()
 
+
+# @login_required
 def get_issues():
     with sqlite3.connect(Connection.db_path) as conn:
         conn.row_factory = sqlite3.Row
@@ -60,6 +62,7 @@ def ticket_form(request):
 
         return render(request, template, context)
 
+# @login_required
 def ticket_edit_form(request, ticket_id):
 
     if request.method == 'GET':
