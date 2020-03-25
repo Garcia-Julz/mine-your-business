@@ -30,8 +30,9 @@
         <ol class="navList">
             <li class="navList__route"><a href="{% url 'mybapp:ticket_list' %}">Tickets</a></li>
             <li class="navList__route"><a href="{% url 'mybapp:rig_list' %}">Rigs</a></li>
+            <li class="navList__route"><a href="{% url 'mybapp:home' %}">Home</a></li>
             <li class="navList__route"><a href="{% url 'mybapp:location_list' %}">Locations</a></li>
-            {% comment %} <li class="navList__route"><a href="{% url 'mybapp:training_list' %}">Profile</a></li> {% endcomment %}
+            <li class="navList__route"><a href="{% url 'mybapp:profile_list' %}">Profile</a></li>
         </ol>
     </nav>
 

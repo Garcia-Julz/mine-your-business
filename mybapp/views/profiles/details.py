@@ -6,7 +6,7 @@ from ...models import Miner
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
-
+# @login_required
 def get_profile(profile_id):
     with sqlite3.connect(Connection.db_path) as conn:
         conn.row_factory = sqlite3.Row

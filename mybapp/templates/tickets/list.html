@@ -13,16 +13,16 @@
     <button><a href="{% url 'mybapp:ticket_form' %}">Add Ticket</a></button>
     <ul>
     {% for ticket in all_tickets %}
-        <li>
-            <div>
+        <li class=''>
             <a href="{% url 'mybapp:ticket' ticket.id %}">{{ ticket.name }}: {{ ticket.title }}<a/>
             <br>
             {{ticket.cat}}
             <br>
-            Status: {{ticket.urgent}}
+                {% if ticket.urgent is 1 %}
+                <p>URGENT!</p>
+                {% endif %}
             <br>
             Description: {{ticket.comments}}
-            <div/>
         </li>
     {% endfor %}
     </ul>

@@ -58,6 +58,7 @@ def profile_form(request):
 
         return render(request, template)
 
+# @login_required
 def profile_edit_form(request, profile_id):
 
     if request.method == 'GET':

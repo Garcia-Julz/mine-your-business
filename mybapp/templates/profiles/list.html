@@ -13,12 +13,14 @@
         {% comment %} <button><a href="{% url 'mybapp:profile_form' %}">Add Location</a></button> {% endcomment %}
     <ul>
     {% for profile in current_profile %}
-            <a href="{% url 'mybapp:profile' profile.id %}">{{ profile.username }}<a/>
-            {% comment %} {{ profile.username }}  {% endcomment %}
+            <a href="{% url 'mybapp:profile' profile.id %}">Edit<a/>
             <br>
+            <a href="{% url 'mybapp:logout' %}">Logout<a/>
+            {% comment %} {{ profile.username }}  {% endcomment %}
+            {% comment %} <br>
             {{ profile.email }} 
             <br>
-            {{ profile.city }}
+            {{ profile.city }} {% endcomment %}
     {% endfor %}
     </ul>
   </body>

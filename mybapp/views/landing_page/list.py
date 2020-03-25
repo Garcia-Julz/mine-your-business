@@ -6,10 +6,11 @@ from ..connection import Connection
 from django.contrib.auth.decorators import login_required
 
 
-@login_required
+# @login_required
 def sample_view(request):
     current_user = request.user
 
+@login_required
 def ticket_list_s(request):
     if request.method == 'GET':
         with sqlite3.connect(Connection.db_path) as conn:
@@ -33,8 +34,9 @@ def ticket_list_s(request):
             ON t.category_id = i.id
             JOIN mybapp_rig r 
             ON r.id = t.rig_id
-            WHERE t.user_id = ?
-            ORDER BY urgent DESC
+            WHERE t.user_id = ? AND urgent = 1
+            ORDER BY created_at ASC
+            LIMIT 3
             """, (current_user.id,))
 
             all_tickets = []

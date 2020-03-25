@@ -1,5 +1,6 @@
 from django.urls import include, path
 from .views import *
+from .views.home import home
 
 app_name = "mybapp"
 
@@ -13,6 +14,8 @@ urlpatterns = [
     path('onboarding/form', location_form_on, name='location_form_on'),
     path('firstrig/', rig_list_on, name='rig_list_on'),
     path('firstrig/form', rig_form_on, name='rig_form_on'),
+    # Splash
+    path('', ticket_list_s, name='home'),
     # Home
     path('home/', ticket_list_s, name='home'),
     # Lists

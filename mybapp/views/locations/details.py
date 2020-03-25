@@ -6,6 +6,7 @@ from ...models import Location
 from django.contrib.auth.decorators import login_required
 
 
+# @login_required
 def get_location(location_id):
     with sqlite3.connect(Connection.db_path) as conn:
         conn.row_factory = sqlite3.Row

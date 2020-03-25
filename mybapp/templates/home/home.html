@@ -15,14 +15,12 @@
 
     <div>
         <ul>
-        <p>Open Tickets:</p>
+        <p>Urgent Tickets Due Soon:</p>
         {% for ticket in all_tickets %}
             <li>
                 {{ ticket.name }}: {{ ticket.title }} 
                 <br>
                 {{ticket.cat}}
-                <br>
-                Status: {{ticket.urgent}}
                 <br>
                 Description: {{ticket.comments}}
             </li>
