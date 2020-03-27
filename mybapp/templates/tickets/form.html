@@ -6,10 +6,13 @@
 <html>
   <head>
     <meta charset="utf-8">
+
+    <link rel="stylesheet" href="{% static 'styles/form.css' %}" />
+
     <title>MYB</title>
   </head>
   <body>
-    <h1>Ticket Form</h1>
+    <center><h1>Ticket Form</h1><center>
 
     {% if ticket.id is not None %}
         <form action="{% url 'mybapp:ticket' ticket.id %}" method="post">
@@ -18,7 +21,8 @@
     {% endif %}
         {% csrf_token %}
 
-    <form action="{% url 'mybapp:ticket_list' %}" method="post">
+    <div class="form-container">
+    <center><form action="{% url 'mybapp:ticket_list' %}" method="post">
       {% csrf_token %}
 
       <fieldset>
@@ -40,7 +44,7 @@
           <label for="urgent">Urgent?: </label>
           <input id="urgent" type="checkbox" name="urgent" {% if ticket.urgent %} checked {% endif %}>
       </fieldset>
-
+        <br>
       {% if ticket.id != null %}
       <fieldset>
           <label for="completed">Completed?: </label>
@@ -50,34 +54,57 @@
       <div class="form-group">
       <fieldset>
           <label for="rig exampleFormControlSelect1">rig: </label>
-          <select class="form-control" id="rig exampleFormControlSelect1" type="text" name="rig">
-                {% for rig in all_rigs %}
-                    <option {% if rig.id == ticket.rig_id %}selected{% endif %} value="{{ rig.id }}">
-                    {{ rig.name }}</option>
-                {% endfor %}
-          </select>
+          <button 
+          class="btn btn-light btn-lg dropdown-toggle" 
+          type="button" 
+          data-toggle="dropdown" 
+          aria-haspopup="true" 
+          aria-expanded="false">
+            <select 
+            {% comment %} class="form-control"  {% endcomment %}
+            id="rig exampleFormControlSelect1" 
+            type="text" 
+            name="rig">
+                    {% for rig in all_rigs %}
+                        <option {% if rig.id == ticket.rig_id %}selected{% endif %} value="{{ rig.id }}">
+                        {{ rig.name }}</option>
+                    {% endfor %}
+            </select>
+          </button>
       </fieldset>
       </div>
       
       <div class="form-group">
       <fieldset>
           <label for="issue exampleFormControlSelect1">issue: </label>
-          <select class="form-control" id="issue exampleFormControlSelect1" type="text" name="issue">
-                {% for issue in all_issues %}
-                    <option {% if issue.id == ticket.issue_id %}selected{% endif %} value="{{ issue.id }}">
-                    {{ issue.cat }}</option>
-                {% endfor %}
-          </select>
+          <button 
+          class="btn btn-light btn-lg dropdown-toggle" 
+          type="button" 
+          data-toggle="dropdown" 
+          aria-haspopup="true" 
+          aria-expanded="false">
+            <select 
+            {% comment %} class="form-control"  {% endcomment %}
+            id="issue exampleFormControlSelect1" 
+            type="text" 
+            name="issue">
+                    {% for issue in all_issues %}
+                        <option {% if issue.id == ticket.issue_id %}selected{% endif %} value="{{ issue.id }}">
+                        {{ issue.cat }}</option>
+                    {% endfor %}
+            </select>
+          </button>
       </fieldset>
       </div>
 
       {% if ticket.id is not None %}
-          <input type="hidden" name="actual_method" value="PUT">
-            <input type="submit" value="Update" />
+          <center><input type="hidden" name="actual_method" value="PUT">
+            <input type="submit" value="Update" /></center>
       {% else %}
-          <input type="submit" value="Create" />
+          <center><button class="btn-warning btn-lg"><input class="text-white" type="submit" value="Create" /></button></center>
       {% endif %}
-    </form>
+    </form></center>
+    </div>
   </body>
 </html>
 {% endblock %}
