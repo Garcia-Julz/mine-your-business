@@ -8,9 +8,11 @@
   <head>
     <meta charset="utf-8">
     <title>MYB</title>
+
+    <link rel="stylesheet" href="{% static 'styles/form.css' %}" />
   </head>
   <body>
-    <h1>Rig Form</h1>
+    <center><h1>Rig Form</h1></center>
 
     {% if rig.id is not None %}
         <form action="{% url 'mybapp:rig' rig.id %}" method="post">
@@ -19,30 +21,43 @@
     {% endif %}
         {% csrf_token %}
 
-    <form action="{% url 'mybapp:rig_list' %}" method="post">
+    <center><form action="{% url 'mybapp:rig_list' %}" method="post">
       {% csrf_token %}
       <fieldset>
           <label for="location">location: </label>
-          <select id="location" type="text" name="location">
+          <br>
+          <button class="btn btn-light btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <select 
+            id="location" 
+            type="text" 
+            name="location">
                 {% for location in all_locations %}
                     <option {% if location.id == rig.location_id %}selected{% endif %} value="{{ location.id }}">
                     {{ location.city }}</option>
                 {% endfor %}
-          </select>
-          <a href='http://localhost:8000/location/form'>Create a Location</a>
+            </select>
+          </button>
+          <br>
+          <br>
+          <center><button class="btn-warning btn-md">
+            <a class="text-white" href='http://localhost:8000/location/form'>Create a Location</a>
+          </center></button>
       </fieldset>
       <fieldset>
           <label for="name">name: </label>
-          <input id="name" type="text" name="name" value="{{ rig.name }}">
+          <input class="form-control form-control-lg city-input" id="name" type="text" name="name" value="{{ rig.name }}">
       </fieldset>
+      <br>
 
       {% if rig.id is not None %}
           <input type="hidden" name="actual_method" value="PUT">
             <input type="submit" value="Update" />
       {% else %}
-          <input type="submit" value="Create" />
+        <button class="btn-warning btn-md">
+          <input class="text-white" type="submit" value="Create" />
+        </button>
       {% endif %}
-    </form>
+    </form></center>
   </body>
 </html>
 

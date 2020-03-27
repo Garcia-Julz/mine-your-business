@@ -9,19 +9,25 @@
     <meta charset="utf-8">
     <title>Mine Your Business</title>
   </head>
+  <center><img class="logo" src="../../static/img/slide-6.svg" width="30%"></img></center>
   <body>
-    <h1>Rigs</h1>
-        <button><a href="{% url 'mybapp:rig_form' %}">Add Rig</a></button>
-    <ol>
+    <center><h1>Rigs</h1></center>
+        <center><button class="btn btn-warning"><a class="text-white" href="{% url 'mybapp:rig_form' %}">Add Rig</a></button></center>
+    {% comment %} <ol> {% endcomment %}
+    <br>
+    
     {% for rig in all_rigs %}
-        <li>
-            <a href="{% url 'mybapp:rig' rig.id %}">{{ rig.name }}<a/>
+        <div>
+          {% comment %} <h5 class="card-header p-3 mb-2 bg-secondary text-white">{{ ticket.title }}</h5> {% endcomment %}
+            <h5 class="card-header p-3 mb-2 bg-secondary text-white"><a class="text-white" href="{% url 'mybapp:rig' rig.id %}">{{ rig.name }}<a/></h5>
             {% comment %} Rig: {{ rig.name }} {% endcomment %}
-            <br>
+            {% comment %} <br> {% endcomment %}
             Location: {{rig.city}}
-        </li>
+            <br>
+            <br>
+        </div>
     {% endfor %}
-    </ol>
+    {% comment %} </ol> {% endcomment %}
   </body>
 </html>
 
