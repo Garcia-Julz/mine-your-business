@@ -2,10 +2,45 @@
 {% comment %} {% extends 'shared/base.html' %} {% endcomment %}
 {% load static %}
 {% block content %}
-  <h2>Sign up</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Sign up</button>
-  </form>
+
+  <meta charset="utf-8">
+  <meta name="viewport" c
+    ontent="width=device-width, 
+    initial-scale=1, 
+    shrink-to-fit=no">
+
+  <link rel="stylesheet" 
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" 
+    crossorigin="anonymous">
+
+
+  <link rel="stylesheet" href="{% static 'styles/login.css' %}" />
+
+
+
+<body>
+<div class="register-container">
+    <div class="login-form">
+        <div class="logo-container">
+            <img class="logo-reg" src="../../static/img/logo-1.png"></img>
+        </div>
+
+        <div class='register-container'>
+          <br>
+          <br>
+          <form class="form-fields-content" method = "post">
+            <div class="form-group form-check">
+            {% csrf_token %}
+            {{ form.as_p }}
+            </div>
+            <div class='button-login'>
+              <center><button type="submit" class="btn btn-warning" id="sign-up-buttons">
+              Sign up</button></center>
+            </div>
+          </form>
+        </div>
+    </div>
+</div>
+
 {% endblock %}

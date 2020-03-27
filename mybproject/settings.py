@@ -120,6 +120,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = [
+    "/Users/juliangarcia/mine-your-business/mybproject/mybapp/static"
+]
+
 LOGIN_REDIRECT_URL = '/home'
 
 LOGOUT_REDIRECT_URL = 'http://localhost:8000/accounts/login/?next='

@@ -47,26 +47,29 @@
           <input id="completed" type="checkbox" name="completed" {% if ticket.completed %} checked {% endif %}>
       </fieldset>
       {% endif %}
-
+      <div class="form-group">
       <fieldset>
-          <label for="rig">rig: </label>
-          <select id="rig" type="text" name="rig">
+          <label for="rig exampleFormControlSelect1">rig: </label>
+          <select class="form-control" id="rig exampleFormControlSelect1" type="text" name="rig">
                 {% for rig in all_rigs %}
                     <option {% if rig.id == ticket.rig_id %}selected{% endif %} value="{{ rig.id }}">
                     {{ rig.name }}</option>
                 {% endfor %}
           </select>
       </fieldset>
+      </div>
       
+      <div class="form-group">
       <fieldset>
-          <label for="issue">issue: </label>
-          <select id="issue" type="text" name="issue">
+          <label for="issue exampleFormControlSelect1">issue: </label>
+          <select class="form-control" id="issue exampleFormControlSelect1" type="text" name="issue">
                 {% for issue in all_issues %}
                     <option {% if issue.id == ticket.issue_id %}selected{% endif %} value="{{ issue.id }}">
                     {{ issue.cat }}</option>
                 {% endfor %}
           </select>
       </fieldset>
+      </div>
 
       {% if ticket.id is not None %}
           <input type="hidden" name="actual_method" value="PUT">

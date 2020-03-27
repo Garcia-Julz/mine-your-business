@@ -11,21 +11,29 @@
 
 <body>
 
-    <h1>Welcome to MYB Systems Management</h1>
+    {% comment %} <h1>Welcome to MYB Systems Management</h1> {% endcomment %}
 
     <div>
-        <ul>
-        <p>Urgent Tickets Due Soon:</p>
+        {% comment %} <ul> {% endcomment %}
+        <h3>Urgent Tickets Due Soon:</h3>
         {% for ticket in all_tickets %}
-            <li>
+        <div class="card">
+            <h5 class="card-header">{{ ticket.title }}</h5>
+            <div class="card-body">
+                <h5 class="card-title">{{ ticket.created_at }}</h5>
+                <p class="card-text">{{ticket.comments}}</p>
+                <a href="{% url 'mybapp:ticket' ticket.id %}" class="btn btn-warning">info</a>
+            </div>
+        </div>
+            {% comment %} <li>
                 {{ ticket.name }}: {{ ticket.title }} 
                 <br>
                 {{ticket.cat}}
                 <br>
                 Description: {{ticket.comments}}
-            </li>
+            </li> {% endcomment %}
         {% endfor %}
-        </ul>
+        {% comment %} </ul> {% endcomment %}
     </div>
 
 </body>

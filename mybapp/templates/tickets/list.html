@@ -11,44 +11,41 @@
   <body>
     <button><a href="{% url 'mybapp:ticket_form' %}">Add Ticket</a></button>
     <div id='opentickets'>
-    <h1>Open Tickets</h1>
-    <ul>
-    {% for ticket in all_tickets %}
-    {% if ticket.completed == 0 %}
-        <li class=''>
-            <a href="{% url 'mybapp:ticket' ticket.id %}">{{ ticket.name }}: {{ ticket.title }}<a/>
-            <br>
-            {{ticket.cat}}
-            <br>
-                {% if ticket.urgent is 1 %}
-                <p>URGENT!</p>
-                {% endif %}
-            <br>
-            Description: {{ticket.comments}}
-        </li>
-    {% endif %}
-    {% endfor %}
-    </ul>
+      <center><h1>❌ Open Tickets</h1></center>
+      {% comment %} <ul> {% endcomment %}
+      {% for ticket in all_tickets %}
+        {% if ticket.completed == 0 %}
+          <div class="card">
+            {% if ticket.urgent is 1 %}
+              <h5 class="card-header p-3 mb-2 bg-secondary text-white">**URGENT**: {{ ticket.title }}</h5>
+            {% else %}
+              <h5 class="card-header p-3 mb-2 bg-secondary text-white">{{ ticket.title }}</h5>
+            {% endif %}
+            <div class="card-body">
+              <h5 class="card-title">{{ ticket.name }}</h5>
+              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+              <a href="{% url 'mybapp:ticket' ticket.id %}" class="btn btn-warning">Info</a>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+      {% comment %} </ul> {% endcomment %}
     </div>
+
     <div id='closedtickets'>
-    <h1>Closed Tickets</h1>
-    <ul>
-    {% for ticket in all_tickets %}
-    {% if ticket.completed == 1 %}
-        <li class=''>
-            <a href="{% url 'mybapp:ticket' ticket.id %}">{{ ticket.name }}: {{ ticket.title }}<a/>
-            <br>
-            {{ticket.cat}}
-            <br>
-                {% if ticket.urgent is 1 %}
-                <p>URGENT!</p>
-                {% endif %}
-            <br>
-            Description: {{ticket.comments}}
-        </li>
-    {% endif %}
-    {% endfor %}
-    </ul>
+      <center><h1>✅ Closed Tickets</h1></center>
+      {% for ticket in all_tickets %}
+        {% if ticket.completed == 1 %}
+          <div class="card">
+              <h5 class="card-header p-3 mb-2 bg-secondary text-white">{{ ticket.title }}</h5>
+            <div class="card-body">
+              <h5 class="card-title">{{ ticket.name }}</h5>
+              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+              <a href="{% url 'mybapp:ticket' ticket.id %}" class="btn btn-warning">Info</a>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
     </div>
   </body>
 </html>
