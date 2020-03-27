@@ -9,20 +9,29 @@
     <title>Mine Your Business</title>
   </head>
   <body>
-    <h1>Profile</h1>
-        {% comment %} <button><a href="{% url 'mybapp:profile_form' %}">Add Location</a></button> {% endcomment %}
-    <ul>
+    <br>
+    <br>
+    <center><img class="logo" src="../../static/img/slide-8.svg" width="50%"></img></center>
+
     {% for profile in current_profile %}
-            <a href="{% url 'mybapp:profile' profile.id %}">Edit<a/>
+    <center>
+    <div>
+    <h3>Welcome, {{ profile.username }}. What would you like to do?</h3>
+        {% comment %} <button><a href="{% url 'mybapp:profile_form' %}">Add Location</a></button> {% endcomment %}
             <br>
-            <a href="{% url 'mybapp:logout' %}">Logout<a/>
+    <div>
+            <button class="btn-warning btn-lg"><a href="{% url 'mybapp:profile' profile.id %}">Edit<a/></button>
+            <br>
+            <br>
+            <button class="btn-warning btn-lg"><a href="{% url 'mybapp:logout' %}">Logout<a/></button>
             {% comment %} {{ profile.username }}  {% endcomment %}
             {% comment %} <br>
             {{ profile.email }} 
             <br>
             {{ profile.city }} {% endcomment %}
     {% endfor %}
-    </ul>
+    </div>
+    </div></center>
   </body>
 </html>
 {% endblock %}

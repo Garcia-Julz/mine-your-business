@@ -50,6 +50,7 @@
           <label for="completed">Completed?: </label>
           <input id="completed" type="checkbox" name="completed" {% if ticket.completed %} checked {% endif %}>
       </fieldset>
+        <br>
       {% endif %}
       <div class="form-group">
       <fieldset>
@@ -98,8 +99,8 @@
       </div>
 
       {% if ticket.id is not None %}
-          <center><input type="hidden" name="actual_method" value="PUT">
-            <input type="submit" value="Update" /></center>
+          <input type="hidden" name="actual_method" value="PUT">
+            <center><button class="btn-warning btn-lg"><input type="submit" value="Update" /></button></center>
       {% else %}
           <center><button class="btn-warning btn-lg"><input class="text-white" type="submit" value="Create" /></button></center>
       {% endif %}

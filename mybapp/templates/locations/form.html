@@ -8,9 +8,12 @@
   <head>
     <meta charset="utf-8">
     <title>MYB</title>
+
+    <link rel="stylesheet" href="{% static 'styles/form.css' %}" />
   </head>
   <body>
-    <h1>Location Form</h1>
+  <center><div>
+    <h1 class="title-location-form">Location Form</h1>
 
     {% if location.id is not None %}
         <form action="{% url 'mybapp:location' location.id %}" method="post">
@@ -24,17 +27,17 @@
       
       <fieldset>
           <label for="city">city: </label>
-          <input id="city" type="text" name="city" value="{{ location.city }}">
+          <input class="city-input" id="city" type="text" name="city" value="{{ location.city }}">
       </fieldset>
-
+      <br>
       {% if location.id is not None %}
           <input type="hidden" name="actual_method" value="PUT">
-            <input type="submit" value="Update" />
+            <center><button class="btn-warning btn-lg"><input type="submit" value="Update" /></button></center>
       {% else %}
-          <input type="submit" value="Create" />
+          <center><button class="btn-warning btn-lg"><input type="submit" value="Create" /></button></center>
       {% endif %}
     </form>
-
+  </div></center>
   </body>
 </html>
 

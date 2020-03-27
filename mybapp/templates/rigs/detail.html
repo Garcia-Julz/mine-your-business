@@ -4,23 +4,27 @@
 
 {% load static %}
 
-    <h3>{{ rig.title }}</h3>
-    <h3> Description: {{ rig.comments }}</h3>
+<link rel="stylesheet" href="{% static 'styles/details.css' %}" />
 
-    <p>name: {{ rig.name }}</p>
-    <p>location: {{ rig.city }}</p>
-
+<center><div class="title-rig-details">
+    <h1> Rig Details</h1>
+    <br>
+    <h4>Name: {{ rig.name }}</h4>
+    <h4>Location: {{ rig.city }}</h4>
+    <br>
+    <br>
     <section>
         <form action="{% url 'mybapp:rig' rig.id %}" method="POST">
             {% csrf_token %}
             <input type="hidden" name="actual_method" value="DELETE">
-        <button>Remove</button>
+        <center><button class="btn-warning btn-lg">Remove</button></center>
         </form>
-
+        <br>
         <form action="{% url 'mybapp:rig_edit_form' rig.id %}" method="GET">
             {% csrf_token %}
-            <button>Edit</button>
+            <center><button class="btn-warning btn-lg">Edit</button></center>
         </form>
     </section>
+</div></center>
     
 {% endblock %}

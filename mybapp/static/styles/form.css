@@ -41,3 +41,15 @@ input#completed {
     background-color: rgb(222, 221, 215);
     color: black;
 }
+
+input.city-input {
+    display: flex;
+    justify-content: flex-start;
+    background-color: rgb(222, 221, 215);
+    color: black;
+}
+
+h1.title-location-form {
+    margin-top: 100px;
+}
+
