@@ -20,10 +20,10 @@
         {% comment %} <button><a href="{% url 'mybapp:profile_form' %}">Add Location</a></button> {% endcomment %}
             <br>
     <div>
-            <button class="btn-warning btn-lg"><a href="{% url 'mybapp:profile' profile.id %}">Edit<a/></button>
+            <button class="btn-warning btn-lg"><a class="text-white" href="{% url 'mybapp:profile' profile.id %}">View details<a/></button>
             <br>
             <br>
-            <button class="btn-warning btn-lg"><a href="{% url 'mybapp:logout' %}">Logout<a/></button>
+            <button class="btn-warning btn-lg"><a class="text-white" href="{% url 'mybapp:logout' %}">Logout<a/></button>
             {% comment %} {{ profile.username }}  {% endcomment %}
             {% comment %} <br>
             {{ profile.email }} 

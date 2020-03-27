@@ -8,11 +8,14 @@
   <head>
     <meta charset="utf-8">
     <title>MYB</title>
+
+    <link rel="stylesheet" href="{% static 'styles/form.css' %}" />
   </head>
   <body>
   
-    <h1>Location Form</h1>
+    <center><h1>Profile Form</h1></center>
 
+     <center>
     {% if profile.id is not None %}
         <form action="{% url 'mybapp:profile' profile.id %}" method="post">
     {% else %}
@@ -22,22 +25,30 @@
 
     {% comment %} <form action="{% url 'mybapp:profile_list' %}" method="post"> {% endcomment %}
       {% comment %} {% csrf_token %} {% endcomment %}
-      
+
       <fieldset>
-          <label for="email">Profile </label>
-          <input id="email" type="email" name="email" value="{{ profile.email }}">
+          <label for="email">Email </label>
+          <input class="form-control form-control-lg profile-input" id="email" type="email" name="email" value="{{ profile.email }}">
       </fieldset>
+      <br>
       <fieldset>
-          <input id="city" type="text" name="city" value="{{ profile.city }}">
+          <label for="email">Your city </label>
+          <input class="form-control form-control-lg profile-input" id="city" type="text" name="city" value="{{ profile.city }}">
       </fieldset>
+      <br>
 
       {% if profile.id is not None %}
+      <button class="btn-warning btn-md">
           <input type="hidden" name="actual_method" value="PUT">
             <input type="submit" value="Update" />
+            </button>
       {% else %}
+      <button class="btn-warning btn-md">
           <input type="submit" value="Create" />
+          </button>
       {% endif %}
     </form>
+    </center>
 
   </body>
 </html>

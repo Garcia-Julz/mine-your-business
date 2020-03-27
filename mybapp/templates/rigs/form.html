@@ -55,8 +55,10 @@
       <br>
 
       {% if rig.id is not None %}
+      <button class="btn-warning btn-md">
           <input type="hidden" name="actual_method" value="PUT">
             <input type="submit" value="Update" />
+      </button>
       {% else %}
         <button class="btn-warning btn-md">
           <input class="text-white" type="submit" value="Create" />
