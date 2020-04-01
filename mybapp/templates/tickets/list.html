@@ -10,9 +10,10 @@
   </head>
   <body>
     <center><img class="logo" src="../../static/img/slide-5.svg" width="30%"></img></center>
-    <center><button class="btn btn-warning"><a href="{% url 'mybapp:ticket_form' %}">Add Ticket</a></button></center>
+    <center><button class="btn btn-warning"><a class="text-white" href="{% url 'mybapp:ticket_form' %}">Add Ticket</a></button></center>
     <div id='opentickets'>
       <center><h1>❌ Open Tickets</h1></center>
+      <br>
       {% comment %} <ul> {% endcomment %}
       {% for ticket in all_tickets %}
         {% if ticket.completed == 0 %}
@@ -24,7 +25,7 @@
             {% endif %}
             <div class="card-body">
               <h5 class="card-title">{{ ticket.name }}</h5>
-              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+              <p class="card-text">{{ ticket.comments }}</p>
               <a href="{% url 'mybapp:ticket' ticket.id %}" class="btn btn-warning">Info</a>
             </div>
           </div>
@@ -32,7 +33,7 @@
       {% endfor %}
       {% comment %} </ul> {% endcomment %}
     </div>
-
+    <br>
     <div id='closedtickets'>
       <center><h1>✅ Closed Tickets</h1></center>
       {% for ticket in all_tickets %}
@@ -41,7 +42,7 @@
               <h5 class="card-header p-3 mb-2 bg-secondary text-white">{{ ticket.title }}</h5>
             <div class="card-body">
               <h5 class="card-title">{{ ticket.name }}</h5>
-              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+              <p class="card-text">{{ ticket.comments }}</p>
               <a href="{% url 'mybapp:ticket' ticket.id %}" class="btn btn-warning">Info</a>
             </div>
           </div>

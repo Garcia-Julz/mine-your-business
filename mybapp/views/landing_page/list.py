@@ -19,11 +19,12 @@ def ticket_list_s(request):
             db_cursor = conn.cursor()
 
             db_cursor.execute("""
-            select
+            SELECT
                 t.id,
                 t.title,
                 t.comments,
                 t.urgent,
+                t.completed,
                 t.created_at,
                 i.cat,
                 r.name,
@@ -34,7 +35,9 @@ def ticket_list_s(request):
             ON t.category_id = i.id
             JOIN mybapp_rig r 
             ON r.id = t.rig_id
-            WHERE t.user_id = ? AND urgent = 1
+            WHERE t.user_id = ? 
+            AND t.completed = 0
+            AND urgent = 1
             ORDER BY created_at ASC
             LIMIT 3
             """, (current_user.id,))
