@@ -14,7 +14,6 @@
     <div id='opentickets'>
       <center><h1>❌ Open Tickets</h1></center>
       <br>
-      {% comment %} <ul> {% endcomment %}
       {% for ticket in all_tickets %}
         {% if ticket.completed == 0 %}
           <div class="card">
@@ -31,7 +30,6 @@
           </div>
         {% endif %}
       {% endfor %}
-      {% comment %} </ul> {% endcomment %}
     </div>
     <br>
     <div id='closedtickets'>
