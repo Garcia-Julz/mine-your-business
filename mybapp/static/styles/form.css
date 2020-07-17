@@ -1,0 +1,63 @@
+input.city-input {
+    width: 40%;
+  }
+
+  /* div.form-container {
+        display: flex;
+        align-items: flex-start;
+  } */
+  /* #comments #created_at #urgent #completed */
+input#title {
+    display: flex;
+    justify-content: flex-start;
+    background-color: rgb(222, 221, 215);
+    color: black;
+}
+
+input#comments {
+    display: flex;
+    justify-content: flex-start;
+    background-color: rgb(222, 221, 215);
+    color: black;
+}
+
+input#created_at {
+    display: flex;
+    justify-content: flex-start;
+    background-color: rgb(222, 221, 215);
+    color: black;
+}
+
+input#urgent {
+    display: flex;
+    justify-content: flex-start;
+    background-color: rgb(222, 221, 215);
+    color: black;
+}
+
+input#completed {
+    display: flex;
+    justify-content: flex-start;
+    background-color: rgb(222, 221, 215);
+    color: black;
+}
+
+input.city-input {
+    display: flex;
+    justify-content: flex-start;
+    background-color: rgb(222, 221, 215);
+    color: black;
+}
+
+input.profile-input {
+    display: flex;
+    justify-content: flex-start;
+    background-color: rgb(222, 221, 215);
+    color: black;
+    width: 80%;
+}
+
+h1.title-location-form {
+    margin-top: 100px;
+}
+

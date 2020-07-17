@@ -9,16 +9,23 @@
     <title>Mine Your Business</title>
   </head>
   <body>
+  <center><img class="logo" src="../../static/img/slide-7.svg" width="30%"></img></center>
+  <center><div>
     <h1>locations</h1>
-        <button><a href="{% url 'mybapp:location_form' %}">Add Location</a></button>
-    <ul>
+        <button class="btn btn-warning"><a class="text-white" href="{% url 'mybapp:location_form' %}">Add Location</a></button>
+    <br>
+    <br>
+    <p>View your rigs by location</p>
+    {% comment %} <ul> {% endcomment %}
     {% for location in all_locations %}
-        <li>
+        <div>
             {% comment %} {{ location.city }} {% endcomment %}
-            <a href="{% url 'mybapp:location' location.id %}">{{ location.city }}<a/>
-        </li>
+            <button class="btn btn-secondary"><a class="text-white" href="{% url 'mybapp:location' location.id %}">{{ location.city }}<a/></button>
+        </div>
+        <br>
     {% endfor %}
-    </ul>
+    {% comment %} </ul> {% endcomment %}
+  <div></center>
   </body>
 </html>
 {% endblock %}

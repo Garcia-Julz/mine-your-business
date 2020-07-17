@@ -3,32 +3,60 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" c
+    ontent="width=device-width, 
+    initial-scale=1, 
+    shrink-to-fit=no">
+
+    <link rel="stylesheet" 
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" 
+    crossorigin="anonymous">
+
+    <link rel="stylesheet" href="{% static 'styles/onboarding-1.css' %}" />
+
     <title>MYB</title>
   </head>
   <body>
-    <h1>Welcome to MYB!</h1>
-
-    {% if location.id is not None %}
-        <form action="{% url 'mybapp:location' location.id %}" method="post">
-    {% else %}
-        <form action="{% url 'mybapp:location_list_on' %}" method="post">
-    {% endif %}
-        {% csrf_token %}
-
-    <form action="{% url 'mybapp:location_list_on' %}" method="post">
-      {% csrf_token %}
-      <p>Where's your current miner?</p>
-      <fieldset>
-          <label for="city">city: </label>
-          <input id="city" type="text" name="city" value="{{ location.city }}">
-      </fieldset>
+    <div class="card-loc">
+      <center><h1 class="display-3">Let's get started!</h1></center>
 
       {% if location.id is not None %}
-          <input type="hidden" name="actual_method" value="PUT">
-            <input type="submit" value="Update" />
+          <form action="{% url 'mybapp:location' location.id %}" method="post">
       {% else %}
-          <input type="submit" value="Create" />
+          <form action="{% url 'mybapp:location_list_on' %}" method="post">
       {% endif %}
-    </form>
+          {% csrf_token %}
+
+      <form action="{% url 'mybapp:location_list_on' %}" method="post">
+        {% csrf_token %}
+        <br>
+        <br>
+        <center><p class="display-4">Where's your current miner?</p></center>
+        <fieldset>
+          <div class="form-group">
+            <center><label 
+            for="exampleInputPassword1 city">
+            City:
+            </label></center>
+            <center><input 
+            type="text" 
+            name="city" 
+            class="form-control form-control-lg city-input" 
+            id="exampleInputPassword1 city" 
+            value="{{ location.city }}"></center>
+          </div>
+            {% comment %} <label for="city">city: </label>
+            <input id="city" type="text" name="city" value="{{ location.city }}"> {% endcomment %}
+        </fieldset>
+
+        {% if location.id is not None %}
+            <input type="hidden" name="actual_method" value="PUT">
+              <input type="submit" value="Update" />
+        {% else %}
+            <button class="create-location-button"><input type="submit" class="btn btn-warning btn-lg" value="Create" /></button>
+        {% endif %}
+      </form>
+    </div>
   </body>
 </html>

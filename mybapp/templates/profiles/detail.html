@@ -2,22 +2,28 @@
 {% block content %}
 {% load static %}
 
+<link rel="stylesheet" href="{% static 'styles/details.css' %}" />
+
+<center><div class="title-profile-details">
     <h3>Profile</h3>
     <h3> {{ profile.username }}</h3>
     <h3> {{ profile.email }}</h3>
     <h3> {{ profile.city }}</h3>
     <section>
-        <form action="{% url 'mybapp:profile' profile.id %}" method="POST">
+        <br>
+        {% comment %} This is a stretch goal {% endcomment %}
+        {% comment %} <form action="{% url 'mybapp:profile' profile.id %}" method="POST">
             {% csrf_token %}
             <input type="hidden" name="actual_method" value="DELETE">
-        <button>Remove!</button>
-        </form>
-
+        <button class="btn-warning btn-lg">Remove!</button>
+        </form> {% endcomment %}
+        <br>
         <form action="{% url 'mybapp:profile_edit_form' profile.id %}" method="GET">
             {% csrf_token %}
-            <button>Edit</button>
+            <button class="btn-warning btn-lg">Edit</button>
         </form>
     </section>
+</div></center>
 
     {% comment %} <ul>
     <p>Rigs in this profile<p/>

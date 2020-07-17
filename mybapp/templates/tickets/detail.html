@@ -3,24 +3,37 @@
 {% block content %}
 {% load static %}
 
-    <h3>{{ ticket.title }}</h3>
+    <link rel="stylesheet" href="{% static 'styles/details.css' %}" />
+
+    <div class="card">
+    <h5 class="card-header">{{ ticket.title }}</h5>
+        <div class="card-body">
+            <h5 class="card-title">Rig: {{ ticket.name }}</h5>
+            <p class="card-text">Issue type: {{ ticket.cat }}</p>
+            <p class="card-text">Description: {{ ticket.comments }}</p>
+            <p class="card-text">Due date: {{ ticket.created_at }}</p>
+            {% comment %} <a href="#" class="btn btn-primary">Go somewhere</a> {% endcomment %}
+        </div>
+    </div>
+
+    {% comment %} <h3>{{ ticket.title }}</h3>
     <h3> Description: {{ ticket.comments }}</h3>
 
     <p>name: {{ ticket.name }}</p>
     <p>Issue type: {{ ticket.cat }}</p>
-    <p>Due date: {{ ticket.created_at }}</p>
+    <p>Due date: {{ ticket.created_at }}</p> {% endcomment %}
 
-    <section>
+    <center><section class="act-buttons">
         <form action="{% url 'mybapp:ticket' ticket.id %}" method="POST">
             {% csrf_token %}
             <input type="hidden" name="actual_method" value="DELETE">
-        <button>Delete!</button>
+            <button class="btn btn-warning act-buttons">Delete!</button>
         </form>
 
         <form action="{% url 'mybapp:ticket_edit_form' ticket.id %}" method="GET">
             {% csrf_token %}
-            <button>Edit</button>
+            <button class="btn btn-warning act-buttons">Edit</button>
         </form>
-    </section>
+    </section></center>
     
 {% endblock %}

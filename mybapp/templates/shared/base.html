@@ -6,19 +6,12 @@
     <meta charset="utf-8">
     <title>Mine Your Business</title>
 
-    <style>.navList {
-            list-style-type: none;
-            display: flex;
-            border: 1px solid lightgray;
-            padding: 1em;
-            justify-content: space-around;
-        }
-        .navList__route {
-            margin: 0 0.5em;
-        }
-        </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="stylesheet" href="{% static 'styles/base.css' %}" type="text/css" media="screen" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" 
+    crossorigin="anonymous">
 
     {% block css %}
     {% endblock %}
@@ -26,7 +19,32 @@
 
 <body>
 
-    <nav id="site-nav">
+    <div class="pos-f-t sticky-top">
+    <div class="collapse" id="navbarToggleExternalContent">
+        <div class="bg-dark p-4">
+        <h5 class="text-white h4">MYB Menu</h5>
+        {% comment %} <span class="text-muted">Toggleable via the navbar brand.</span> {% endcomment %}
+        <li class="navList__route"><a href="{% url 'mybapp:ticket_list' %}">Tickets</a></li>
+        <li class="navList__route"><a href="{% url 'mybapp:rig_list' %}">Rigs</a></li>
+        <li class="navList__route"><a href="{% url 'mybapp:home' %}">Home</a></li>
+        <li class="navList__route"><a href="{% url 'mybapp:location_list' %}">Locations</a></li>
+        <li class="navList__route"><a href="{% url 'mybapp:profile_list' %}">Profile</a></li>
+        </div>
+    </div>
+    <nav class="navbar navbar-dark bg-dark">
+        <button class="navbar-toggler" 
+        type="button" 
+        data-toggle="collapse" 
+        data-target="#navbarToggleExternalContent" 
+        aria-controls="navbarToggleExternalContent" 
+        aria-expanded="false" 
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon">
+        </span>
+        </button>
+    </nav>
+    </div>
+    {% comment %} <nav id="site-nav">
         <ol class="navList">
             <li class="navList__route"><a href="{% url 'mybapp:ticket_list' %}">Tickets</a></li>
             <li class="navList__route"><a href="{% url 'mybapp:rig_list' %}">Rigs</a></li>
@@ -34,15 +52,18 @@
             <li class="navList__route"><a href="{% url 'mybapp:location_list' %}">Locations</a></li>
             <li class="navList__route"><a href="{% url 'mybapp:profile_list' %}">Profile</a></li>
         </ol>
-    </nav>
+    </nav> {% endcomment %}
 
-<center><h1>MYB</h1></center>
+{% comment %} <center><h1>MYB</h1></center> {% endcomment %}
 
     {% block content %}
     {% endblock %}
 
-    {% block scripts %}
-    {% endblock scripts %}
+    {% comment %} {% block scripts %} {% endcomment %}
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    {% comment %} {% endblock scripts %} {% endcomment %}
 
 </body>
 

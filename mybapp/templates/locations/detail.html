@@ -1,29 +1,32 @@
 {% extends 'shared/base.html' %}
 {% block content %}
 {% load static %}
-
-    <h3>Current city</h3>
-    <h3> {{ location.city }}</h3>
-    <section>
-        <form action="{% url 'mybapp:location' location.id %}" method="POST">
-            {% csrf_token %}
-            <input type="hidden" name="actual_method" value="DELETE">
-        <button>Remove!</button>
-        </form>
-
-        <form action="{% url 'mybapp:location_edit_form' location.id %}" method="GET">
-            {% csrf_token %}
-            <button>Edit</button>
-        </form>
-    </section>
-
+<div>
+    <center><div>
+        <h3></h3>
+        <h3> {{ location.city }}</h3>
+        <br>
+        <section>
+            <form action="{% url 'mybapp:location' location.id %}" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="actual_method" value="DELETE">
+            <button class="btn btn-warning">Remove!</button>
+            </form>
+            <br>
+            <form action="{% url 'mybapp:location_edit_form' location.id %}" method="GET">
+                {% csrf_token %}
+                <button class="btn btn-warning">Edit</button>
+            </form>
+        </section>
+    </div></center>
+    <br>
     <ul>
-    <p>Rigs in this location<p/>
+    <p>Rigs in {{ location.city }}<p/>
     {% for rig in rigs %}
         <li>
             {{ rig.name }}
         </li>
     {% endfor %}
     </ul>
-    
+</div>
 {% endblock %}
