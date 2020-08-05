@@ -16,12 +16,6 @@
         </div>
     </div>
 
-    {% comment %} <h3>{{ ticket.title }}</h3>
-    <h3> Description: {{ ticket.comments }}</h3>
-
-    <p>name: {{ ticket.name }}</p>
-    <p>Issue type: {{ ticket.cat }}</p>
-    <p>Due date: {{ ticket.created_at }}</p> {% endcomment %}
 
     <center><section class="act-buttons">
         <form action="{% url 'mybapp:ticket' ticket.id %}" method="POST">
