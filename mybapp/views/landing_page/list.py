@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 
 
 # @login_required
+# Will use in future ^
 def sample_view(request):
     current_user = request.user
 
